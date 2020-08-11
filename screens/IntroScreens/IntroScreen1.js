@@ -7,7 +7,7 @@ export default class IntroScreen1 extends Component{
         return(
             <View style= {styles.viewStyles} >
                 <Text> Hiii </Text>
-                <Image style={styles.stretch} source={ require('../assets/favicon.png') } />
+                <Image style={styles.stretch} source={ require('../../assets/favicon.png') } />
                 <Text style= {styles.textStyle} > 
                     Learn react-native with plenty of examples that most apps use
                 </Text>

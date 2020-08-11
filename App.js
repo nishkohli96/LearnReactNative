@@ -8,10 +8,13 @@ import { StyleSheet, View } from 'react-native';
 import BasicUI from './components/BasicUI';
 import KbdAvoidingView from './components/KbdAvoidingView';
 import ModalComponent from './components/ModalComponent';
+import OnBoardScreen from './screens/IntroScreens/OnBoardScreen';
 
 export default function App() {
+
   return (
     <View style={styles.container} >
+      {/* <OnBoardScreen /> */}
       <BasicUI />
       <KbdAvoidingView />
       <ModalComponent />
@@ -34,6 +37,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#007aba',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
 });
