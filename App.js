@@ -8,14 +8,10 @@ import { StyleSheet, View } from 'react-native';
 import BasicUI from './components/BasicUI';
 import KbdAvoidingView from './components/KbdAvoidingView';
 import ModalComponent from './components/ModalComponent';
-import IntroScreen from './screens/IntroScreen';
-// import AppIntro from 'react-native-app-intro';
 
 export default function App() {
-  // console.log(AppIntro);
   return (
     <View style={styles.container} >
-      <IntroScreen />
       <BasicUI />
       <KbdAvoidingView />
       <ModalComponent />
