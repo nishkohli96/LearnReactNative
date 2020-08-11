@@ -5,6 +5,7 @@ import { StyleSheet, View } from 'react-native';
 // import { NavigationContainer } from '@react-navigation/native';
 // import { createStackNavigator } from '@react-navigation/stack';
 
+import NavList from './screens/NavList';
 import BasicUI from './components/BasicUI';
 import KbdAvoidingView from './components/KbdAvoidingView';
 import ModalComponent from './components/ModalComponent';
@@ -14,10 +15,11 @@ export default function App() {
 
   return (
     <View style={styles.container} >
+      <NavList />
       {/* <OnBoardScreen /> */}
-      <BasicUI />
+      {/* <BasicUI />
       <KbdAvoidingView />
-      <ModalComponent />
+      <ModalComponent /> */}
     </View>
     // <NavigationContainer>
     //   <Stack.Navigator>
