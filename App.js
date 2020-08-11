@@ -1,20 +1,42 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+// import 'react-native-gesture-handler';
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createStackNavigator } from '@react-navigation/stack';
+
+import BasicUI from './components/BasicUI';
+import KbdAvoidingView from './components/KbdAvoidingView';
+import ModalComponent from './components/ModalComponent';
+import IntroScreen from './screens/IntroScreen';
+// import AppIntro from 'react-native-app-intro';
 
 export default function App() {
+  // console.log(AppIntro);
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={styles.container} >
+      <IntroScreen />
+      <BasicUI />
+      <KbdAvoidingView />
+      <ModalComponent />
     </View>
+    // <NavigationContainer>
+    //   <Stack.Navigator>
+    //     <Stack.Screen
+    //       name="Home"
+    //       component={BasicUI}
+    //       options={{ title: 'Welcome' }}
+    //     />
+    //     {/* <Stack.Screen name="Profile" component={ProfileScreen} /> */}
+    //   </Stack.Navigator>
+    // </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#007aba',
     alignItems: 'center',
     justifyContent: 'center',
   },
