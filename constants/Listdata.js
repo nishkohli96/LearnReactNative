@@ -1,22 +1,26 @@
-import React from 'react';
-import IntroScreen1 from '../screens/IntroScreens/IntroScreen1';
-import IntroScreen2 from '../screens/IntroScreens/IntroScreen2';
-import IntroScreen3 from '../screens/IntroScreens/IntroScreen3';
-
 export const Listdata = [
     {
+        screenName: 'BasicUI',
+        index: '0',
+        description: 'Includes Buttons and Images',
+        collapsed: true
+    },
+    {
         screenName: 'IntroScreen1',
-        component: <IntroScreen1 />,
-        index: '0'
+        index: '1',
+        description: 'IntroScreen1',
+        collapsed: true
     },
     {
         screenName: 'IntroScreen2',
-        component: <IntroScreen2 />,
-        index: '1'
+        index: '2',
+        description: 'IntroScreen2',
+        collapsed: true        
     },
     {
         screenName: 'IntroScreen3',
-        component: <IntroScreen3 />,
-        index: '2'
+        index: '3',
+        description: 'IntroScreen3',
+        collapsed: true
     },
 ];

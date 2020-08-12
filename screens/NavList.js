@@ -1,24 +1,44 @@
-import React from 'react';
-import { FlatList, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React,{ useState } from 'react';
+import { FlatList, View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import { Listdata } from '../constants/Listdata';
+import Collapsible from 'react-native-collapsible';
 
-const Item = ({ title, onPress }) => (
+
+const NavList = ({ navigation }) => {
+
+const [collapsed,changeCollapse] = useState(true);
+
+const togglecollapsed = () =>{
+    changeCollapse( prevState => !prevState );
+}
+
+const Item = ({ itemObject, onPress }) => (
     <TouchableOpacity onPress={onPress} >
-      <Text style= {styles.listItem} >{title}</Text>
+      <Text style= {styles.listItem} >{itemObject.screenName}</Text>
+        <Collapsible collapsed={collapsed} align="center">
+            <View style={styles.content}>
+              <Text style={{ textAlign: 'center' }}>
+                { itemObject.description }
+              </Text>
+            </View>
+        </Collapsible>
     </TouchableOpacity>
 );
 
-function setSelectedId(item) {
-    console.log("pressed",item);
-}
-
-const NavList = () => {
     const renderItem = ({ item }) => (
-        <Item title={item.screenName}  onPress={() => setSelectedId(item.screenName)} />
+        <Item itemObject={item}  onPress={() => setSelectedId(item)} />
     );
 
+    function setSelectedId(item) {
+        console.log("befre pressed",item.collapsed);
+        // item.collapsed = !item.collapsed;
+        togglecollapsed();
+        console.log("pressed",item.collapsed);
+        // navigation.navigate(item.screenName);
+    }
+
     return(
-        <View style= {styles.listContainer} >
+        <View style= {styles.listContainer} >            
             <FlatList 
                 data={Listdata}
                 renderItem={renderItem}

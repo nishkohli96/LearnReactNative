@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
-import { Button, StyleSheet, View, Switch, ActivityIndicator, Image } from 'react-native';
+import { Button, StyleSheet, View, Switch, ActivityIndicator, Image, Text,
+  StatusBar } from 'react-native';
 
 const BasicUI = () => {
     const [isEnabled, setIsEnabled] = useState(false);
-    const toggleSwitch = () => //setIsEnabled(previousState => !previousState);
-    {
-        console.log('prev value :',isEnabled);
-        if( !isEnabled){
-          alert('true');
-        }
-        setIsEnabled(previousState => !previousState);
+    const [counter, incCounter] = useState(0);
+
+    const toggleSwitch = () => {
+      setIsEnabled(isEnabled => !isEnabled);
+    }
+
+    function _onPressButton() {
+      incCounter(counter+1);
     }
     
     return (
       <View style={styles.container}>
+        <StatusBar backgroundColor="blue"/>
         <View style={styles.buttonContainer}>
             <Button
                 onPress={_onPressButton}
@@ -29,6 +32,8 @@ const BasicUI = () => {
                 onChange = {toggleSwitch}
                 value = {isEnabled}
             />
+            <Text> Btn clicked {counter} Times </Text>
+            <Text> ToggledOn? { isEnabled? 'true': 'false'}  </Text>
             <Image
                 style={styles.stretch}
                 source={ require('../assets/favicon.png') }
@@ -36,10 +41,6 @@ const BasicUI = () => {
         </View>
       </View>
     );
-}
-
-function _onPressButton() {
-    alert('You tapped the button!');
 }
 
 const styles = StyleSheet.create({
