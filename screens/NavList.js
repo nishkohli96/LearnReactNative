@@ -1,117 +1,131 @@
-import React,{ useState } from 'react';
-import { FlatList, View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import React, { useState } from 'react';
+import {
+    FlatList,
+    View,
+    Text,
+    StyleSheet,
+    TouchableOpacity,
+    Image,
+} from 'react-native';
 import { Listdata } from '../constants/Listdata';
 import Collapsible from 'react-native-collapsible';
 
-
 const NavList = ({ navigation }) => {
+    const expand_icon = require('../assets/icons/expand-icon.png');
+    const collapse_icon = require('../assets/icons/collapse-icon.png');
 
-const expand_icon = require('../assets/icons/expand-icon.png');
-const collapse_icon = require('../assets/icons/collapse-icon.png');
+    const [dataArr, setData] = useState(Listdata);
 
-const [dataArr,setData] = useState(Listdata);
-
-/* Implement an expansion panel; onclick of the icon expands/contracts; clicking elsewhere
+    /* Implement an expansion panel; onclick of the icon expands/contracts; clicking elsewhere
     takes to the item route page */
-const Item = ({ itemObject, onItemPress, panelCollapse }) => (
-    <View>
-    <View style= {styles.rowAlign}>
-                   
-        <View > 
-            <TouchableOpacity onPress={onItemPress} >
-                <Text style= {styles.listItem} >{itemObject.screenName} </Text>
-            </TouchableOpacity>
-      </View>
+    const Item = ({ itemObject, onItemPress, panelCollapse }) => (
+        <View>
+            <View style={styles.rowAlign}>
+                <View>
+                    <TouchableOpacity onPress={onItemPress}>
+                        <Text style={styles.listItem}>
+                            {itemObject.screenName}{' '}
+                        </Text>
+                    </TouchableOpacity>
+                </View>
 
-          <View style= {styles.btnAlign}>
-            <TouchableOpacity onPress={panelCollapse} >      
-              <Image style={styles.buttonImage} 
-                source = {itemObject.collapsed ? expand_icon : collapse_icon } >
-               </Image>
-               </TouchableOpacity>
-          </View>
-          </View>
-        <Collapsible collapsed={itemObject.collapsed} align="center">
-            <View style={styles.content}>
-              <Text style={{ textAlign: 'center' }}>
-                { itemObject.description }
-              </Text>
+                <View style={styles.btnAlign}>
+                    <TouchableOpacity onPress={panelCollapse}>
+                        <Image
+                            style={styles.buttonImage}
+                            source={
+                                itemObject.collapsed
+                                    ? expand_icon
+                                    : collapse_icon
+                            }
+                        ></Image>
+                    </TouchableOpacity>
+                </View>
             </View>
-        </Collapsible>
+            <Collapsible collapsed={itemObject.collapsed} align="center">
+                <View style={styles.content}>
+                    <Text style={{ textAlign: 'center' }}>
+                        {itemObject.description}
+                    </Text>
+                </View>
+            </Collapsible>
         </View>
-);
-
-    const renderItem = ({ item }) => (
-        <Item itemObject={item}  onItemPress={() => navigateToScreen(item)} 
-        panelCollapse= {() => expandPanel(item)}/>
     );
 
-    function expandPanel(item)
-    {
-        item.collapsed = !item.collapsed;        
+    const renderItem = ({ item }) => (
+        <Item
+            itemObject={item}
+            onItemPress={() => navigateToScreen(item)}
+            panelCollapse={() => expandPanel(item)}
+        />
+    );
+
+    function expandPanel(item) {
+        item.collapsed = !item.collapsed;
         /* Update the dataArr state */
         setData(
-            dataArr.map(rec => 
-                rec.index === item.index 
-                ? {...rec, collapsed: !(rec.collapsed)} 
-                : rec 
-        ));
+            dataArr.map((rec) =>
+                rec.index === item.index
+                    ? { ...rec, collapsed: !rec.collapsed }
+                    : rec
+            )
+        );
     }
 
     function navigateToScreen(item) {
         navigation.navigate(item.screenName);
     }
 
-    return(
-        <View style= {styles.listContainer} >    
-        <Text style= {styles.headerText}>
-            Please Click on the List Item to see their working Demo, or expand the item,
-            to see a brief description of their functionality.
-        </Text>        
-            <FlatList 
+    return (
+        <View style={styles.listContainer}>
+            <Text style={styles.headerText}>
+                Please Click on the List Item to see their working Demo, or
+                expand the item, to see a brief description of their
+                functionality.
+            </Text>
+            <FlatList
                 data={Listdata}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.index}
             />
         </View>
     );
-}
+};
 
-const styles= StyleSheet.create({
+const styles = StyleSheet.create({
     listContainer: {
         flex: 1,
-        marginTop: 20
+        marginTop: 20,
     },
     headerText: {
         color: 'blue',
         fontSize: 15,
-        padding: 10
+        padding: 10,
     },
     listItem: {
         color: 'orange',
         fontSize: 20,
-        padding: 10
+        padding: 10,
     },
     buttonImage: {
         width: 20,
         height: 20,
     },
-    btnAlign:{
+    btnAlign: {
         justifyContent: 'center',
         paddingRight: 10,
         paddingLeft: 10,
         width: 50,
         alignItems: 'flex-end',
-        backgroundColor: 'beige'
+        backgroundColor: 'beige',
     },
-    rowAlign:{
+    rowAlign: {
         flex: 1,
         flexDirection: 'row',
         backgroundColor: '#4e4e4e',
         justifyContent: 'space-between',
-        margin: 5
-    }
+        margin: 5,
+    },
 });
 
 export default NavList;
-

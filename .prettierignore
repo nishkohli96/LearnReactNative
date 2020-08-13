@@ -1,0 +1,12 @@
+.expo
+.expo-shared
+assets
+node_modules
+.gitignore
+.prettierignore
+app.json
+babel.config.js
+yarn.lock
+yarn-error.log
+
+
