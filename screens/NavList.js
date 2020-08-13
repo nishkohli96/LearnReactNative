@@ -13,18 +13,24 @@ const [dataArr,setData] = useState(Listdata);
 
 /* Implement an expansion panel; onclick of the icon expands/contracts; clicking elsewhere
     takes to the item route page */
-const Item = ({ itemObject, onPress, panelCollapse }) => (
-    <TouchableOpacity onPress={onPress} >
-        <View style= {styles.rowAlign}> 
-      <Text style= {styles.listItem} >{itemObject.screenName} </Text>
+const Item = ({ itemObject, onItemPress, panelCollapse }) => (
+    <View>
+    <View style= {styles.rowAlign}>
+                   
+        <View > 
+            <TouchableOpacity onPress={onItemPress} >
+                <Text style= {styles.listItem} >{itemObject.screenName} </Text>
+            </TouchableOpacity>
+      </View>
+
           <View style= {styles.btnAlign}>
-          <TouchableOpacity onPress={panelCollapse} >      
+            <TouchableOpacity onPress={panelCollapse} >      
               <Image style={styles.buttonImage} 
                 source = {itemObject.collapsed ? expand_icon : collapse_icon } >
                </Image>
                </TouchableOpacity>
           </View>
-      </View>
+          </View>
         <Collapsible collapsed={itemObject.collapsed} align="center">
             <View style={styles.content}>
               <Text style={{ textAlign: 'center' }}>
@@ -32,17 +38,16 @@ const Item = ({ itemObject, onPress, panelCollapse }) => (
               </Text>
             </View>
         </Collapsible>
-    </TouchableOpacity>
+        </View>
 );
 
     const renderItem = ({ item }) => (
-        <Item itemObject={item}  onPress={() => setSelectedId(item)} 
+        <Item itemObject={item}  onItemPress={() => navigateToScreen(item)} 
         panelCollapse= {() => expandPanel(item)}/>
     );
 
     function expandPanel(item)
     {
-        console.log("panel expand");
         item.collapsed = !item.collapsed;        
         /* Update the dataArr state */
         setData(
@@ -53,12 +58,16 @@ const Item = ({ itemObject, onPress, panelCollapse }) => (
         ));
     }
 
-    function setSelectedId(item) {
+    function navigateToScreen(item) {
         navigation.navigate(item.screenName);
     }
 
     return(
-        <View style= {styles.listContainer} >            
+        <View style= {styles.listContainer} >    
+        <Text style= {styles.headerText}>
+            Please Click on the List Item to see their working Demo, or expand the item,
+            to see a brief description of their functionality.
+        </Text>        
             <FlatList 
                 data={Listdata}
                 renderItem={renderItem}
@@ -71,7 +80,12 @@ const Item = ({ itemObject, onPress, panelCollapse }) => (
 const styles= StyleSheet.create({
     listContainer: {
         flex: 1,
-        marginTop: 50
+        marginTop: 20
+    },
+    headerText: {
+        color: 'blue',
+        fontSize: 15,
+        padding: 10
     },
     listItem: {
         color: 'orange',
