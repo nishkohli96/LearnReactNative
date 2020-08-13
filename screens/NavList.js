@@ -13,14 +13,16 @@ const [dataArr,setData] = useState(Listdata);
 
 /* Implement an expansion panel; onclick of the icon expands/contracts; clicking elsewhere
     takes to the item route page */
-const Item = ({ itemObject, onPress }) => (
+const Item = ({ itemObject, onPress, panelCollapse }) => (
     <TouchableOpacity onPress={onPress} >
         <View style= {styles.rowAlign}> 
-      <Text style= {styles.listItem} >{itemObject.screenName} </Text>      
+      <Text style= {styles.listItem} >{itemObject.screenName} </Text>
           <View style= {styles.btnAlign}>
+          <TouchableOpacity onPress={panelCollapse} >      
               <Image style={styles.buttonImage} 
                 source = {itemObject.collapsed ? expand_icon : collapse_icon } >
                </Image>
+               </TouchableOpacity>
           </View>
       </View>
         <Collapsible collapsed={itemObject.collapsed} align="center">
@@ -34,10 +36,13 @@ const Item = ({ itemObject, onPress }) => (
 );
 
     const renderItem = ({ item }) => (
-        <Item itemObject={item}  onPress={() => setSelectedId(item)} />
+        <Item itemObject={item}  onPress={() => setSelectedId(item)} 
+        panelCollapse= {() => expandPanel(item)}/>
     );
 
-    function setSelectedId(item) {
+    function expandPanel(item)
+    {
+        console.log("panel expand");
         item.collapsed = !item.collapsed;        
         /* Update the dataArr state */
         setData(
@@ -46,7 +51,10 @@ const Item = ({ itemObject, onPress }) => (
                 ? {...rec, collapsed: !(rec.collapsed)} 
                 : rec 
         ));
-        // navigation.navigate(item.screenName);
+    }
+
+    function setSelectedId(item) {
+        navigation.navigate(item.screenName);
     }
 
     return(
@@ -71,12 +79,16 @@ const styles= StyleSheet.create({
         padding: 10
     },
     buttonImage: {
-        width: 17,
-        height: 17,
+        width: 20,
+        height: 20,
     },
     btnAlign:{
         justifyContent: 'center',
-        marginRight: 20
+        paddingRight: 10,
+        paddingLeft: 10,
+        width: 50,
+        alignItems: 'flex-end',
+        backgroundColor: 'beige'
     },
     rowAlign:{
         flex: 1,
