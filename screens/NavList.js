@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { BackHandler, Alert, Platform } from 'react-native';
 import {
     FlatList,
     View,
@@ -11,6 +12,34 @@ import { Listdata } from '../constants/Listdata';
 import Collapsible from 'react-native-collapsible';
 
 const NavList = ({ navigation }) => {
+    /* Back Button Implementation For Android, to Close the app in this case */
+    useEffect(() => {
+        const backAction = () => {
+            if (Platform.OS === 'android') {
+                // if(  Stack.Screen.name === 'NavList'){
+                Alert.alert('Hold on!', 'Close the App?', [
+                    {
+                        text: 'Cancel',
+                        onPress: () => null,
+                        style: 'cancel',
+                    },
+                    {
+                        text: 'YES',
+                        onPress: () => BackHandler.exitApp(),
+                    },
+                ]);
+                //}
+            }
+            return true;
+        };
+
+        const backHandler = BackHandler.addEventListener(
+            'hardwareBackPress',
+            backAction
+        );
+        return () => backHandler.remove();
+    }, []);
+
     const expand_icon = require('../assets/icons/expand-icon.png');
     const collapse_icon = require('../assets/icons/collapse-icon.png');
 

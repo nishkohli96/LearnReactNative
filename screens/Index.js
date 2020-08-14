@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { BackHandler, Alert, Platform } from 'react-native';
 
 import NavList from './NavList';
 import BasicUI from '../components/BasicUI';
@@ -17,36 +16,6 @@ import WebViewComp from '../components/WebViewComp';
 const Stack = createStackNavigator();
 
 const Index = () => {
-
-    /* Back Button Implementation For Android */
-    useEffect(() => {
-        const backAction = () => {
-            if( Platform.OS === 'android' ) {
-                // if(  Stack.Screen.name === 'NavList'){
-            Alert.alert('Hold on!', 'Close the App?', [
-                {
-                    text: 'Cancel',
-                    onPress: () => null,
-                    style: 'cancel',
-                },
-                {
-                    text: 'YES',
-                    onPress: () => BackHandler.exitApp(),
-                },
-            ]);
-            //}
-            }
-            return true;
-        };
-
-        const backHandler = BackHandler.addEventListener(
-            'hardwareBackPress',
-            backAction
-        );
-
-        return () => backHandler.remove();
-    }, []);
-
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="NavList">
@@ -77,7 +46,6 @@ const Index = () => {
             </Stack.Navigator>
         </NavigationContainer>
     );
-
-}
+};
 
 export default Index;
