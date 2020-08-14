@@ -21,7 +21,7 @@ const NavList = ({ navigation }) => {
     const Item = ({ itemObject, onItemPress, panelCollapse }) => (
         <View>
             <View style={styles.rowAlign}>
-                <View>
+                <View style={styles.textContainer}>
                     <TouchableOpacity onPress={onItemPress}>
                         <Text style={styles.listItem}>
                             {itemObject.screenName}{' '}
@@ -105,7 +105,11 @@ const styles = StyleSheet.create({
     listItem: {
         color: 'orange',
         fontSize: 20,
-        padding: 10,
+        padding: 10
+    },
+    textContainer: {
+        width: 300,
+        height: 50
     },
     buttonImage: {
         width: 20,

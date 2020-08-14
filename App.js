@@ -1,6 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useEffect } from 'react';
-import { StyleSheet, View, BackHandler, Text, Alert } from 'react-native';
+import { StyleSheet, BackHandler, Alert } from 'react-native';
 // import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -13,6 +12,7 @@ import OnBoardScreen from './screens/IntroScreens/OnBoardScreen';
 import IntroScreen1 from './screens/IntroScreens/IntroScreen1';
 import IntroScreen2 from './screens/IntroScreens/IntroScreen2';
 import IntroScreen3 from './screens/IntroScreens/IntroScreen3';
+import ApiList from './components/ApiList';
 
 const Stack = createStackNavigator();
 
@@ -51,6 +51,7 @@ export default function App() {
                     options={{ title: 'Welcome' }}
                 />
                 <Stack.Screen name="BasicUI" component={BasicUI} />
+                <Stack.Screen name="Modal" component={ModalComponent} />
                 <Stack.Screen
                     name="IntroScreen1"
                     component={IntroScreen1}
@@ -61,6 +62,11 @@ export default function App() {
                     name="IntroScreen3"
                     component={IntroScreen3}
                     options={{ title: 'IntroScreen3' }}
+                />
+                <Stack.Screen
+                    name="ApiList"
+                    component={ApiList}
+                    options={{ title: 'Pokemon List' }}
                 />
             </Stack.Navigator>
         </NavigationContainer>
