@@ -13,6 +13,7 @@ import IntroScreen1 from './screens/IntroScreens/IntroScreen1';
 import IntroScreen2 from './screens/IntroScreens/IntroScreen2';
 import IntroScreen3 from './screens/IntroScreens/IntroScreen3';
 import ApiList from './components/ApiList';
+import WebViewComp from './components/WebViewComp';
 
 const Stack = createStackNavigator();
 
@@ -68,6 +69,7 @@ export default function App() {
                     component={ApiList}
                     options={{ title: 'Pokemon List' }}
                 />
+                <Stack.Screen name="WebViewComp" component={WebViewComp} />
             </Stack.Navigator>
         </NavigationContainer>
     );

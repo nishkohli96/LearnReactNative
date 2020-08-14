@@ -1,5 +1,6 @@
 /* List Item for the NavList shown on the 1st Page of the App. ScreenName and 
-    Route name in StackNavigation have been kept the same, for the sake of simplicity */ 
+    Route name in StackNavigation have been kept the same, for the sake of simplicity */
+
 export const Listdata = [
     {
         screenName: 'BasicUI',
@@ -16,7 +17,7 @@ export const Listdata = [
     {
         screenName: 'ApiList',
         index: '2',
-        description: 'Get list of Pokemons from an API and render them in a flatlist',
+        description: 'Get data from an API; open a link in a webview ',
         collapsed: true,
     },
     {

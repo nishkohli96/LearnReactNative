@@ -105,11 +105,11 @@ const styles = StyleSheet.create({
     listItem: {
         color: 'orange',
         fontSize: 20,
-        padding: 10
+        padding: 10,
     },
     textContainer: {
         width: 300,
-        height: 50
+        height: 50,
     },
     buttonImage: {
         width: 20,

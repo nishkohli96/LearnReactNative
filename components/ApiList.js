@@ -1,54 +1,85 @@
-//import PoreCompoent for preventing unnecesary updates. 
-import React, {  useState } from 'react';
-import { View,Image,Button,StyleSheet, FlatList, TouchableOpacity, Text, ActivityIndicator } from 'react-native';
+//import PoreCompoent for preventing unnecesary updates.
+import React, { useState } from 'react';
+import {
+    View,
+    Button,
+    StyleSheet,
+    FlatList,
+    TouchableOpacity,
+    Text,
+    ActivityIndicator,
+} from 'react-native';
+import Collapsible from 'react-native-collapsible';
 
+const Item = ({ title }) => (
+    <View style={styles.listitem}>
+        <Text style={styles.itemText}>{title}</Text>
+    </View>
+);
 
-const PokeList = () => {
-    const [pokeList,setPokeList]= useState([]);
-    const [loading,listLoading]= useState(true);
+const renderItem = ({ item }) => <Item title={item.name} />;
+
+const ApiList = ({ navigation }) => {
+    const [pokeList, setPokeList] = useState([]);
+    const [srching, isSrchStarted] = useState(true);
 
     async function getPokeList() {
         //Have a try and catch block for catching errors.
         try {
-            //Assign the promise unresolved first then get the data using the json method. 
+            //Assign the promise unresolved first then get the data using the json method.
+            isSrchStarted(false);
             await fetch('https://pokeapi.co/api/v2/pokemon/')
-            .then(res => res.json())
-            .then( res => {
-                console.log("poke " ,res);
-                setPokeList(res);
-                listLoading(false);
-            })
-        } catch(err) {
-            console.log("Error fetching data-----------", err);
+                .then((res) => res.json())
+                .then((res) => {
+                    // setPokeList(pokeList.concat(res.results))
+                    setPokeList(res.results);
+                    isSrchStarted(true);
+                });
+        } catch (err) {
+            console.log('Error fetching data-----------', err);
         }
     }
 
-    const Item = ({ title }) => (
-        <View style={styles.item}>
-          <Text style={styles.title}>{title}</Text>
+    function openWebView() {
+        navigation.navigate('WebViewComp');
+    }
+
+    return (
+        <View style={styles.container}>
+            <View style={styles.headerContainer}>
+                <Text style={styles.header}>
+                    {' '}
+                    Get List of First 20 Pokemons from
+                </Text>
+                <TouchableOpacity onPress={() => openWebView()}>
+                    <Text style={styles.linkText}>'this Api'</Text>
+                </TouchableOpacity>
+            </View>
+            <Button
+                title="Get Pokemon List "
+                color="#841584"
+                width="100"
+                onPress={() => getPokeList()}
+            />
+            {/* <Collapsible collapsed={ srching }>
+                <View>
+                    <Text> Fetching List of Pokemons </Text>
+                    <ActivityIndicator />
+                </View>
+            </Collapsible> */}
+            <View style={styles.listContainer}>
+                <FlatList
+                    data={pokeList}
+                    renderItem={renderItem}
+                    keyExtractor={(item) => item.name}
+                />
+            </View>
         </View>
     );
-
-    const renderItem = ({ item }) => (
-        <Item title={item.name} />
-    );
-
-    return(
-        <View style= {styles.container}>
-            <Button  title="Get Pokemon List"
-            color="#841584" width="100" onPress={() => getPokeList()} />
-        <FlatList
-            data={pokeList}
-            renderItem={renderItem}
-            keyExtractor={item => item.name}
-        />
-        </View>
-    )
-}
+};
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         marginTop: 20,
         width: 200,
         alignItems: 'center',
@@ -59,5 +90,32 @@ const styles = StyleSheet.create({
         marginVertical: 8,
         marginHorizontal: 16,
     },
+    itemText: {
+        color: 'red',
+        fontSize: 20,
+    },
+    header: {
+        color: 'maroon',
+        fontSize: 15,
+        marginLeft: 10,
+        marginBottom: 10,
+    },
+    headerContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginLeft: 30,
+        width: 300,
+    },
+    listContainer: {
+        marginTop: 20,
+        marginBottom: 20,
+        height: 300,
+    },
+    linkText: {
+        color: 'blue',
+        fontStyle: 'italic',
+        marginBottom: 20,
+    },
 });
-export default PokeList;
+
+export default ApiList;
