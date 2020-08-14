@@ -17,7 +17,8 @@ export const Listdata = [
     {
         screenName: 'ApiList',
         index: '2',
-        description: 'Get data from an API; open a link in a webview ',
+        description:
+            'Get data from an API; open link in a webview ',
         collapsed: true,
     },
     {
