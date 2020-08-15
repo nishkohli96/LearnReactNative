@@ -19,7 +19,7 @@ const ModalComponent = () => {
                 transparent={true}
                 visible={modalVisible}
                 onRequestClose={(data) => {
-                    alert('Modal has been closed.' + data);
+                    Alert('Modal has been closed.' + data);
                 }}
             >
                 {/* Transparent false sets bg color to white, until modal closed */}

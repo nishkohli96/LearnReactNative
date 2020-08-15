@@ -6,13 +6,14 @@ import NavList from './NavList';
 import BasicUI from '../components/BasicUI';
 import KbdAvoidingView from '../components/KbdAvoidingView';
 import ModalComponent from '../components/ModalComponent';
+import ApiList from '../components/ApiList';
+import WebViewComp from '../components/WebViewComp';
+import DefaultApps from '../components/DefaultApps';
+
 import OnBoardScreen from './IntroScreens/OnBoardScreen';
 import IntroScreen1 from './IntroScreens/IntroScreen1';
 import IntroScreen2 from './IntroScreens/IntroScreen2';
 import IntroScreen3 from './IntroScreens/IntroScreen3';
-import ApiList from '../components/ApiList';
-import WebViewComp from '../components/WebViewComp';
-
 const Stack = createStackNavigator();
 
 const Index = () => {
@@ -25,6 +26,7 @@ const Index = () => {
                     options={{ title: 'Welcome' }}
                 />
                 <Stack.Screen name="BasicUI" component={BasicUI} />
+                <Stack.Screen name="DefaultApps" component={DefaultApps} />
                 <Stack.Screen name="Modal" component={ModalComponent} />
                 <Stack.Screen
                     name="IntroScreen1"

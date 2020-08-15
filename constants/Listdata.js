@@ -21,9 +21,9 @@ export const Listdata = [
         collapsed: true,
     },
     {
-        screenName: 'IntroScreen3',
+        screenName: 'DefaultApps',
         index: '3',
-        description: 'IntroScreen3',
+        description: "Email, call, text etc. using device's default apps",
         collapsed: true,
     },
     {
@@ -36,6 +36,12 @@ export const Listdata = [
         screenName: 'IntroScreen2',
         index: '5',
         description: 'IntroScreen2',
+        collapsed: true,
+    },
+    {
+        screenName: 'IntroScreen3',
+        index: '6',
+        description: 'IntroScreen3',
         collapsed: true,
     },
 ];
