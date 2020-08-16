@@ -27,14 +27,16 @@ const OpenURLButton = ({ url, children }) => {
 };
 
 const OpenSettingsButton = ({ children }) => {
-  const handlePress = useCallback(async () => {
-    /* Open the custom settings if the app has one */
-    await Linking.openSettings();
-  }, []);
+    const handlePress = useCallback(async () => {
+        /* Open the custom settings if the app has one */
+        await Linking.openSettings();
+    }, []);
 
-  return( <View style={styles.btn}> 
-  <Button title={children} onPress={handlePress} />
-    </View>);
+    return (
+        <View style={styles.btn}>
+            <Button title={children} onPress={handlePress} />
+        </View>
+    );
 };
 
 const DefaultApps = () => {

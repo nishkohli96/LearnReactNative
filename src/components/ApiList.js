@@ -7,11 +7,9 @@ import {
     FlatList,
     TouchableOpacity,
     Text,
-    ActivityIndicator,
 } from 'react-native';
-import Collapsible from 'react-native-collapsible';
 
-const Item = ({ title }) => (
+const Item = (title) => (
     <View style={styles.listitem}>
         <Text style={styles.itemText}>{title}</Text>
     </View>
@@ -21,19 +19,16 @@ const renderItem = ({ item }) => <Item title={item.name} />;
 
 const ApiList = ({ navigation }) => {
     const [pokeList, setPokeList] = useState([]);
-    const [srching, isSrchStarted] = useState(true);
 
     async function getPokeList() {
         //Have a try and catch block for catching errors.
         try {
             //Assign the promise unresolved first then get the data using the json method.
-            isSrchStarted(false);
             await fetch('https://pokeapi.co/api/v2/pokemon/')
                 .then((res) => res.json())
                 .then((res) => {
                     // setPokeList(pokeList.concat(res.results))
                     setPokeList(res.results);
-                    isSrchStarted(true);
                 });
         } catch (err) {
             console.log('Error fetching data-----------', err);
@@ -52,7 +47,7 @@ const ApiList = ({ navigation }) => {
                     Get List of First 20 Pokemons from
                 </Text>
                 <TouchableOpacity onPress={() => openWebView()}>
-                    <Text style={styles.linkText}>'this Api'</Text>
+                    <Text style={styles.linkText}>this Api</Text>
                 </TouchableOpacity>
             </View>
             <Button
@@ -61,12 +56,6 @@ const ApiList = ({ navigation }) => {
                 width="100"
                 onPress={() => getPokeList()}
             />
-            {/* <Collapsible collapsed={ srching }>
-                <View>
-                    <Text> Fetching List of Pokemons </Text>
-                    <ActivityIndicator />
-                </View>
-            </Collapsible> */}
             <View style={styles.listContainer}>
                 <FlatList
                     data={pokeList}

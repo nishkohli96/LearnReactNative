@@ -14,12 +14,14 @@
         "eslint": "^7.7.0",
         "eslint-config-prettier": "^6.11.0",
         "eslint-plugin-react": "^7.20.6",
+        "eslint-plugin-react-hooks": "^4.0.8",
         "expo": "~38.0.8",
         "expo-cli": "^3.24.0",
         "expo-google-app-auth": "^8.1.2",
         "expo-status-bar": "^1.0.2",
         "global": "^4.4.0",
         "husky": "^4.2.5",
+        "lint-staged": "^10.2.11",
         "react": "~16.11.0",
         "react-dom": "~16.11.0",
         "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
@@ -39,6 +41,19 @@
         "@babel/core": "^7.8.6",
         "babel-preset-expo": "~8.1.0",
         "prettier": "^2.0.5"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "src/**/*.{js,jsx}": [
+            "eslint --ext .jsx --ext .js src/ --fix"
+        ],
+        "./src/**": [
+            "prettier --write ."
+        ]
     },
     "private": true
 }
