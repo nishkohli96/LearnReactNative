@@ -1,9 +1,10 @@
 .expo
 .expo-shared
-assets
+src/assets
 node_modules
 .gitignore
 .prettierignore
+.eslintrc.json
 app.json
 babel.config.js
 yarn.lock
