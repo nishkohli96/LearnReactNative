@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { Alert, Button, Linking, StyleSheet, View } from 'react-native';
 
-const supportedURL = 'https://google.com';
+const supportedURL = 'https://github.com/nishkohli96/LearnReactNative';
 
 const unsupportedURL = 'slack://open?team=123456';
 
