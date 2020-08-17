@@ -108,9 +108,8 @@ const NavList = ({ navigation }) => {
     return (
         <View style={styles.listContainer}>
             <Text style={styles.headerText}>
-                Please Click on the List Item to see their working Demo, or
-                expand the item, to see a brief description of their
-                functionality.
+                Please Click on the List Item for Demo, or expand the item,for
+                brief description. Code in same file as the item name
             </Text>
             <FlatList
                 data={Listdata}

@@ -27,9 +27,9 @@ export const Listdata = [
         collapsed: true,
     },
     {
-        screenName: 'IntroScreen1',
+        screenName: 'CountriesList',
         index: '4',
-        description: 'IntroScreen1',
+        description: 'Display List & country detail after clicking on item ',
         collapsed: true,
     },
     {
@@ -42,6 +42,12 @@ export const Listdata = [
         screenName: 'IntroScreen3',
         index: '6',
         description: 'IntroScreen3',
+        collapsed: true,
+    },
+    {
+        screenName: 'IntroScreen1',
+        index: '7',
+        description: 'IntroScreen1',
         collapsed: true,
     },
 ];

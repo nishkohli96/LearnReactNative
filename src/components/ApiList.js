@@ -9,13 +9,13 @@ import {
     Text,
 } from 'react-native';
 
-const Item = (title) => (
+const renderItem = ({ item }) => <Item title={item.name} />;
+
+const Item = ({ title }) => (
     <View style={styles.listitem}>
         <Text style={styles.itemText}>{title}</Text>
     </View>
 );
-
-const renderItem = ({ item }) => <Item title={item.name} />;
 
 const ApiList = ({ navigation }) => {
     const [pokeList, setPokeList] = useState([]);
@@ -27,7 +27,6 @@ const ApiList = ({ navigation }) => {
             await fetch('https://pokeapi.co/api/v2/pokemon/')
                 .then((res) => res.json())
                 .then((res) => {
-                    // setPokeList(pokeList.concat(res.results))
                     setPokeList(res.results);
                 });
         } catch (err) {
