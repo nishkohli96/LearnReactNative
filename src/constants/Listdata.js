@@ -21,7 +21,7 @@ export const Listdata = [
 		collapsed: true,
 	},
 	{
-		screenName: 'DefaultApps',
+		screenName: 'LinkinginApps',
 		index: '3',
 		description: 'Email, call, text etc. using device\'s default apps',
 		collapsed: true,
@@ -32,12 +32,12 @@ export const Listdata = [
 		description: 'Display List & country detail after clicking on item ',
 		collapsed: true,
 	},
-	// {
-	//     screenName: 'IntroScreen2',
-	//     index: '5',
-	//     description: 'IntroScreen2',
-	//     collapsed: true,
-	// },
+	{
+		screenName: 'FlexView',
+		index: '5',
+		description: 'Flex Layout Implementation',
+		collapsed: true,
+	},
 	// {
 	//     screenName: 'IntroScreen3',
 	//     index: '6',

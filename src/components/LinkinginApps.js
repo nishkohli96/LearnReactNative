@@ -30,7 +30,7 @@ const OpenURLButton = (url) => {
 		</View>
 	);
 };
-
+'';
 const OpenSettingsButton = () => {
 	const handlePress = useCallback(async () => {
 		/* Open the custom settings if the app has one */
@@ -93,7 +93,7 @@ async function callonPhone(phonenum) {
 	return Linking.openURL(url);
 }
 
-const DefaultApps = () => {
+const LinkinginApps = () => {
 	return (
 		<View style={styles.container}>
 			<OpenURLButton url={supportedURL} title={supbtnText} />
@@ -145,9 +145,8 @@ const styles = StyleSheet.create({
 });
 
 /* To prevent the linting err */
-DefaultApps.propTypes = {
+LinkinginApps.propTypes = {
 	url: PropTypes.string,
-	btnTitle: PropTypes.string,
 };
 
-export default DefaultApps;
+export default LinkinginApps;
