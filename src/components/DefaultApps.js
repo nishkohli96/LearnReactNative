@@ -83,7 +83,7 @@ async function sendSMS(phonenum, msg) {
 async function callonPhone(phonenum, body) {
     let url = `tel:${phonenum}`;
     /* Similarly for sms, `sms:${phonenum}` */
-
+    console.log("hi")
     const canOpen = await Linking.canOpenURL(url);
     if (!canOpen) {
         throw new Error('Provided URL can not be handled');
