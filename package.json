@@ -18,6 +18,7 @@
         "expo": "~38.0.8",
         "expo-cli": "^3.24.0",
         "expo-google-app-auth": "^8.1.2",
+        "expo-sms": "^8.2.1",
         "expo-status-bar": "^1.0.2",
         "global": "^4.4.0",
         "husky": "^4.2.5",

@@ -6267,6 +6267,11 @@ expo-pwa@0.0.30:
     fs-extra "9.0.0"
     update-check "1.5.3"
 
+expo-sms@^8.2.1:
+  version "8.2.1"
+  resolved "https://registry.yarnpkg.com/expo-sms/-/expo-sms-8.2.1.tgz#5ffe9de6f2c886b48b89f6084d98e72e3a6aecd9"
+  integrity sha512-D+FFxkhWpBp6fAZJNPrHZqSu/3HHgA5kO6mWyE7PAC5D+5jP63dQkO/WVbh2CbMoKoSjOM+/RsgggYTTieXCQg==
+
 expo-splash-screen@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/expo-splash-screen/-/expo-splash-screen-0.3.1.tgz#4dd79d9d1ab8135281f7cc5889a68e3003223f37"
