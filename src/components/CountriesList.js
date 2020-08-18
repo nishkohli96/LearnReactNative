@@ -1,48 +1,54 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Countries } from '../constants/Countries';
+import PropTypes from 'prop-types';
 
 const CountriesList = ({ navigation }) => {
-    const viewCountry = (country) => {
-        navigation.navigate('ListItemPageRoute', {
-            name: country.country_name,
-            flagURL: country.flag_url,
-        });
-    };
+	const viewCountry = (country) => {
+		navigation.navigate('ListItemPageRoute', {
+			name: country.country_name,
+			flagURL: country.flag_url,
+		});
+	};
 
-    return (
-        <View style={styles.container}>
-            {Countries.map((country, key) => (
-                <View style={styles.itemContainer}>
-                    <Text
-                        key={country.code}
-                        style={styles.listitem}
-                        onPress={() => viewCountry(country)}
-                    >
-                        {country.country_name}
-                    </Text>
-                </View>
-            ))}
-        </View>
-    );
+	return (
+		<View style={styles.container}>
+			{Countries.map((country) => (
+				<View style={styles.itemContainer} key={country.code}>
+					<Text
+						style={styles.listitem}
+						onPress={() => viewCountry(country)}
+					>
+						{country.country_name}
+					</Text>
+				</View>
+			))}
+		</View>
+	);
 };
 
 const styles = StyleSheet.create({
-    container: {
-        marginTop: 20,
-        backgroundColor: 'lightpink',
-    },
-    itemContainer: {
-        width: 300,
-        height: 40,
-        padding: 10,
-        margin: 10,
-        backgroundColor: 'orange',
-    },
-    listitem: {
-        color: 'yellow',
-        fontSize: 20,
-    },
+	container: {
+		marginTop: 20,
+		backgroundColor: 'lightpink',
+	},
+	itemContainer: {
+		width: 300,
+		height: 40,
+		padding: 10,
+		margin: 10,
+		backgroundColor: 'orange',
+	},
+	listitem: {
+		color: 'yellow',
+		fontSize: 20,
+	},
 });
+
+CountriesList.propTypes = {
+	navigation: PropTypes.shape({
+		navigate: PropTypes.func.isRequired,
+	}).isRequired,
+};
 
 export default CountriesList;
