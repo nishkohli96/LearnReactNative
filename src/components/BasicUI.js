@@ -9,6 +9,7 @@ import {
 	Text,
 	StatusBar,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const BasicUI = () => {
 	const [isEnabled, setIsEnabled] = useState(false);
@@ -22,9 +23,14 @@ const BasicUI = () => {
 		incCounter(counter + 1);
 	}
 
+	function resetCounter() {
+		incCounter(0);
+	}
+
 	return (
 		<View style={styles.container}>
-			<StatusBar backgroundColor="blue" />
+			{/* <StatusBar backgroundColor="blue" hidden  />   */}
+			<StatusBar backgroundColor="#007aba" />
 			<View style={styles.buttonContainer}>
 				<Button
 					onPress={_onPressButton}
@@ -49,6 +55,14 @@ const BasicUI = () => {
 					style={styles.stretch}
 					source={require('../assets/favicon.png')}
 				/>
+
+				<Icon.Button
+					name="facebook"
+					backgroundColor="#3b5998"
+					onPress={resetCounter}
+				>
+                    Login with Facebook
+				</Icon.Button>
 			</View>
 		</View>
 	);

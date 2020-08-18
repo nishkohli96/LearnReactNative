@@ -38,6 +38,7 @@ const NavList = ({ navigation }) => {
 			'hardwareBackPress',
 			backAction
 		);
+
 		return () => backHandler.remove();
 	}, []);
 

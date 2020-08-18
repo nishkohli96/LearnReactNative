@@ -5,62 +5,87 @@ import {
 	Text,
 	TouchableHighlight,
 	View,
+	ImageBackground,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const ModalComponent = () => {
+	const image = { uri: 'https://reactjs.org/logo-og.png' };
 	const [modalVisible, setModalVisible] = useState(false);
 
 	return (
-		<View style={styles.centeredView}>
-			<Modal
-				animationType="slide"
-				transparent={true}
-				visible={modalVisible}
-				// onRequestClose={(data) => {
-				//     Alert('Modal has been closed.' + data);
-				// }}
-			>
-				{/* Transparent false sets bg color to white, until modal closed */}
+		<View style={styles.container}>
+			<ImageBackground source={image} style={styles.image}>
 				<View style={styles.centeredView}>
-					<View style={styles.modalView}>
-						<Text style={styles.modalText}>Hello World!</Text>
+					<Text style={styles.text}>
+						{' '}
+                        Added Icon from react-native-vector-icons
+					</Text>
+					<Icon name="rocket" size={50} color="#900" />
+					<Modal
+						animationType="slide"
+						transparent={true}
+						visible={modalVisible}
+						// onRequestClose={(data) => {
+						//     Alert('Modal has been closed.' + data);
+						// }}
+					>
+						{/* Transparent false sets bg color to white, until modal closed */}
+						<View style={styles.centeredView}>
+							<View style={styles.modalView}>
+								<Text style={styles.modalText}>
+                                    Hello World!
+								</Text>
 
-						<TouchableHighlight
-							style={{
-								...styles.openButton,
-								backgroundColor: '#2196F3',
-							}}
-							onPress={() => {
-								setModalVisible(!modalVisible);
-								// data = {
-								//     name: 'nish',
-								// };
-							}}
-						>
-							<Text style={styles.textStyle}>Hide Modal</Text>
-						</TouchableHighlight>
-					</View>
+								<TouchableHighlight
+									style={{
+										...styles.openButton,
+										backgroundColor: '#2196F3',
+									}}
+									onPress={() => {
+										setModalVisible(!modalVisible);
+										// data = {
+										//     name: 'nish',
+										// };
+									}}
+								>
+									<Text style={styles.textStyle}>
+                                        Hide Modal
+									</Text>
+								</TouchableHighlight>
+							</View>
+						</View>
+					</Modal>
+
+					<TouchableHighlight
+						style={styles.openButton}
+						onPress={() => {
+							setModalVisible(true);
+						}}
+					>
+						<Text style={styles.textStyle}>Show Modal</Text>
+					</TouchableHighlight>
 				</View>
-			</Modal>
-
-			<TouchableHighlight
-				style={styles.openButton}
-				onPress={() => {
-					setModalVisible(true);
-				}}
-			>
-				<Text style={styles.textStyle}>Show Modal</Text>
-			</TouchableHighlight>
+			</ImageBackground>
 		</View>
 	);
 };
 
 const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		flexDirection: 'column',
+	},
+
 	centeredView: {
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
 		marginTop: 22,
+	},
+	text: {
+		color: '#ffffff',
+		fontSize: 20,
 	},
 	modalView: {
 		margin: 20,
@@ -91,6 +116,11 @@ const styles = StyleSheet.create({
 	modalText: {
 		marginBottom: 15,
 		textAlign: 'center',
+	},
+	image: {
+		flex: 1,
+		resizeMode: 'cover',
+		justifyContent: 'center',
 	},
 });
 

@@ -29,7 +29,7 @@ const CountriesList = ({ navigation }) => {
 
 const styles = StyleSheet.create({
 	container: {
-		marginTop: 20,
+		marginTop: 40,
 		backgroundColor: 'lightpink',
 	},
 	itemContainer: {
