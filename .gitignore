@@ -10,5 +10,6 @@ npm-debug.*
 web-build/
 yarn.lock
 .gitignore
+yarn-error.log
 # macOS
 .DS_Store
