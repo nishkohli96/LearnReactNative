@@ -4,6 +4,10 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 
+import IntroScreen1 from './IntroScreens/IntroScreen1';
+import IntroScreen2 from './IntroScreens/IntroScreen2';
+import IntroScreen3 from './IntroScreens/IntroScreen3';
+
 function HomeScreen({ navigation }) {
     return (
         <View
@@ -31,15 +35,18 @@ const Drawer = createDrawerNavigator();
 
 const NavDrawer = () => {
     return (
-        <NavigationContainer>
-            <Drawer.Navigator initialRouteName="Home">
-                <Drawer.Screen name="Home" component={HomeScreen} />
-                <Drawer.Screen
-                    name="Notifications"
-                    component={NotificationsScreen}
-                />
-            </Drawer.Navigator>
-        </NavigationContainer>
+        // <NavigationContainer>
+        <Drawer.Navigator initialRouteName="Home">
+            <Drawer.Screen name="Home" component={HomeScreen} />
+            <Drawer.Screen
+                name="Notifications"
+                component={NotificationsScreen}
+            />
+            <Drawer.Screen name="IntroScreen1" component={IntroScreen1} />
+            <Drawer.Screen name="IntroScreen2" component={IntroScreen2} />
+            <Drawer.Screen name="IntroScreen3" component={IntroScreen3} />
+        </Drawer.Navigator>
+        // </NavigationContainer>
     );
 };
 

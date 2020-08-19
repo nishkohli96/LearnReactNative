@@ -28,35 +28,35 @@ const HomeScreen = ({ navigation }) => {
 
 const MatTabTop = () => {
     return (
-        <NavigationContainer>
-            <Tab.Navigator
-                backBehavior="order"
-                style={{ marginTop: 20 }}
-                tabBarOptions={{
-                    labelStyle: { fontSize: 12 },
-                    tabStyle: { width: 90 },
-                    style: { backgroundColor: 'powderblue' },
-                    activeTintColor: 'darkgreen',
-                    inactiveTintColor: 'yellow',
-                    showIcon: true, // default is false
+        // <NavigationContainer>
+        <Tab.Navigator
+            backBehavior="order"
+            style={{ marginTop: 20 }}
+            tabBarOptions={{
+                labelStyle: { fontSize: 12 },
+                tabStyle: { width: 90 },
+                style: { backgroundColor: 'powderblue' },
+                activeTintColor: 'darkgreen',
+                inactiveTintColor: 'yellow',
+                showIcon: true, // default is false
+            }}
+        >
+            <Tab.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{
+                    tabBarLabel: 'Home',
+                    tabBarIcon: () => (
+                        <Icon name="home" color="white" size={26} />
+                    ),
+                    tabBarColor: 'crimson',
                 }}
-            >
-                <Tab.Screen
-                    name="Home"
-                    component={HomeScreen}
-                    options={{
-                        tabBarLabel: 'Home',
-                        tabBarIcon: () => (
-                            <Icon name="home" color="white" size={26} />
-                        ),
-                        tabBarColor: 'crimson',
-                    }}
-                />
-                <Tab.Screen name="Tab1" component={IntroScreen1} />
-                <Tab.Screen name="Tab2" component={IntroScreen2} />
-                <Tab.Screen name="Tab3" component={IntroScreen3} />
-            </Tab.Navigator>
-        </NavigationContainer>
+            />
+            <Tab.Screen name="Tab1" component={IntroScreen1} />
+            <Tab.Screen name="Tab2" component={IntroScreen2} />
+            <Tab.Screen name="Tab3" component={IntroScreen3} />
+        </Tab.Navigator>
+        // </NavigationContainer>
     );
 };
 

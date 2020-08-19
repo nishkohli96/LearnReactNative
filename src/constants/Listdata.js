@@ -6,7 +6,7 @@ export const Listdata = [
         screenName: 'BasicUI',
         index: '0',
         description: 'Button, Switch, Image, StatusBar, ActivityIndicator',
-        collapsed: true,
+        collapsed: false,
     },
     {
         screenName: 'Modal',
@@ -38,16 +38,22 @@ export const Listdata = [
         description: 'Flex Layout Implementation',
         collapsed: true,
     },
-    // {
-    //     screenName: 'MatTabBottom',
-    //     index: '6',
-    //     description: 'Navigation Drawer with Tab Layout',
-    //     collapsed: true,
-    // },
-    // {
-    //     screenName: 'IntroScreen1',
-    //     index: '7',
-    //     description: 'IntroScreen1',
-    //     collapsed: true,
-    // },
+    {
+        screenName: 'NavDrawer',
+        index: '6',
+        description: 'Navigation Drawer with Tab Layout',
+        collapsed: true,
+    },
+    {
+        screenName: 'MatTabTop',
+        index: '7',
+        description: 'Tabs on Top with Navigation',
+        collapsed: true,
+    },
+    {
+        screenName: 'MatTabBottom',
+        index: '8',
+        description: 'Tabs on Bottom with Navigation',
+        collapsed: true,
+    },
 ];

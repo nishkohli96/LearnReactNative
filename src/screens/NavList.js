@@ -11,13 +11,14 @@ import {
 import { Listdata } from '../constants/Listdata';
 import Collapsible from 'react-native-collapsible';
 import PropTypes from 'prop-types';
+import { useNavigation } from '@react-navigation/native';
 
-const NavList = ({ navigation }) => {
+const NavList = () => {
+    const navigation = useNavigation(); /* Navigation Hook */
     /* Back Button Implementation For Android, to Close the app in this case */
     useEffect(() => {
         const backAction = () => {
             if (Platform.OS === 'android') {
-                // if(  Stack.Screen.name === 'NavList'){
                 Alert.alert('Hold on!', 'Close the App?', [
                     {
                         text: 'Cancel',
@@ -29,7 +30,6 @@ const NavList = ({ navigation }) => {
                         onPress: () => BackHandler.exitApp(),
                     },
                 ]);
-                //}
             }
             return true;
         };

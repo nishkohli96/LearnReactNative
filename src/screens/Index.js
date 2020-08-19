@@ -4,10 +4,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import NavList from './NavList';
-// import MatTabBottom from './MatTabBottom';
 
 import BasicUI from '../components/BasicUI';
-// import KbdAvoidingView from '../components/KbdAvoidingView';
 import ModalComponent from '../components/ModalComponent';
 import ApiList from '../components/ApiList';
 import WebViewComp from '../components/WebViewComp';
@@ -15,6 +13,10 @@ import LinkinginApps from '../components/LinkinginApps';
 import CountriesList from '../components/CountriesList';
 import ListItemPageRoute from '../components/ListItemPageRoute';
 import FlexView from '../components/FlexView';
+import MatTabTop from './MatTabTop';
+import MatTabBottom from './MatTabBottom';
+import NavDrawer from './NavDrawer';
+
 /* Srch icons from
 	https://oblador.github.io/react-native-vector-icons/
 */
@@ -100,6 +102,9 @@ const Index = () => {
                     name="ListItemPageRoute"
                     component={ListItemPageRoute}
                 />
+                <Stack.Screen name="MatTabTop" component={MatTabTop} />
+                <Stack.Screen name="MatTabBottom" component={MatTabBottom} />
+                <Stack.Screen name="NavDrawer" component={NavDrawer} />
             </Stack.Navigator>
         </NavigationContainer>
     );
