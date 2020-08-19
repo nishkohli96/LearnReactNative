@@ -4,6 +4,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import NavList from './NavList';
+// import MatTabBottom from './MatTabBottom';
+
 import BasicUI from '../components/BasicUI';
 // import KbdAvoidingView from '../components/KbdAvoidingView';
 import ModalComponent from '../components/ModalComponent';
@@ -22,83 +24,85 @@ import Icon from 'react-native-vector-icons/Feather';
 const Stack = createStackNavigator();
 
 const Index = () => {
-	const clickMe = () => {
-		console.log('Open settings');
-	};
+    const clickMe = () => {
+        console.log('Open settings');
+        // navigation.navigate('LinkinginApps');
+    };
 
-	const headerRightBtn = () => {
-		return (
-			<View style={{ marginRight: 20 }}>
-				<Icon
-					name="settings"
-					size={25}
-					color="#900"
-					onPress={clickMe}
-				></Icon>
-			</View>
-		);
-	};
+    const headerRightBtn = () => {
+        return (
+            <View style={{ marginRight: 20 }}>
+                <Icon
+                    name="settings"
+                    size={25}
+                    color="#900"
+                    onPress={clickMe}
+                ></Icon>
+            </View>
+        );
+    };
 
-	return (
-		<NavigationContainer>
-			{/* Setting Default Props of header across all screens  */}
-			<Stack.Navigator
-				initialRouteName="NavList"
-				screenOptions={{
-					headerStyle: {
-						backgroundColor: '#f4511e',
-					},
-					headerTintColor: '#fff',
-					headerTitleStyle: {
-						fontWeight: 'bold',
-					},
-					headerRight: { headerRightBtn },
-				}}
-			>
-				<Stack.Screen
-					name="NavList"
-					component={NavList}
-					options={{
-						title: 'Navlist',
-						headerTintColor: 'yellow',
-						headerStyle: {
-							backgroundColor: '#007aba',
-						},
-						headerTitleAlign: 'center',
-					}}
-				/>
-				<Stack.Screen name="BasicUI" component={BasicUI} />
-				<Stack.Screen name="LinkinginApps" component={LinkinginApps} />
-				<Stack.Screen name="Modal" component={ModalComponent} />
-				<Stack.Screen
-					name="CountriesList"
-					component={CountriesList}
-					// options={{ headerShown: false }}
-				/>
-				<Stack.Screen
-					name="FlexView"
-					component={FlexView}
-					options={{
-						title: 'Flex Layout',
-						headerTintColor: 'yellow',
-						headerStyle: {
-							backgroundColor: '#007aba',
-						},
-					}}
-				/>
-				<Stack.Screen
-					name="ApiList"
-					component={ApiList}
-					options={{ title: 'Pokemon List' }}
-				/>
-				<Stack.Screen name="WebViewComp" component={WebViewComp} />
-				<Stack.Screen
-					name="ListItemPageRoute"
-					component={ListItemPageRoute}
-				/>
-			</Stack.Navigator>
-		</NavigationContainer>
-	);
+    return (
+        <NavigationContainer>
+            {/* Setting Default Props of header across all screens  */}
+            <Stack.Navigator
+                initialRouteName="NavList"
+                screenOptions={{
+                    headerStyle: {
+                        backgroundColor: '#f4511e',
+                    },
+                    headerTintColor: 'blue',
+                    headerTitleStyle: {
+                        fontWeight: 'bold',
+                    },
+                    headerRight: headerRightBtn,
+                }}
+            >
+                <Stack.Screen
+                    name="NavList"
+                    component={NavList}
+                    options={{
+                        title: 'Navlist',
+                        headerTintColor: 'yellow',
+                        headerStyle: {
+                            backgroundColor: '#007aba',
+                        },
+                        headerTitleAlign: 'center',
+                    }}
+                />
+                <Stack.Screen name="BasicUI" component={BasicUI} />
+                <Stack.Screen name="LinkinginApps" component={LinkinginApps} />
+                <Stack.Screen name="Modal" component={ModalComponent} />
+                {/* <Stack.Screen name="MatTabBottom" component={MatTabBottom} /> */}
+                <Stack.Screen
+                    name="CountriesList"
+                    component={CountriesList}
+                    // options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="FlexView"
+                    component={FlexView}
+                    options={{
+                        title: 'Flex Layout',
+                        headerTintColor: 'yellow',
+                        headerStyle: {
+                            backgroundColor: '#007aba',
+                        },
+                    }}
+                />
+                <Stack.Screen
+                    name="ApiList"
+                    component={ApiList}
+                    options={{ title: 'Pokemon List' }}
+                />
+                <Stack.Screen name="WebViewComp" component={WebViewComp} />
+                <Stack.Screen
+                    name="ListItemPageRoute"
+                    component={ListItemPageRoute}
+                />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
 };
 
 export default Index;
