@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
-import PropTypes from 'prop-types';
 
 /* Please do refer
  *  https://reactnative.dev/docs/flexbox#docsNav
@@ -165,11 +164,5 @@ const styles = StyleSheet.create({
         flex: 0.5,
     },
 });
-
-FlexView.propTypes = {
-    navigation: PropTypes.shape({
-        navigate: PropTypes.func.isRequired,
-    }).isRequired,
-};
 
 export default FlexView;

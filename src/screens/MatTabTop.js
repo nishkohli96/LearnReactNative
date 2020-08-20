@@ -1,5 +1,6 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+// import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { View, Button } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -13,20 +14,26 @@ const Tab = createMaterialTopTabNavigator();
 
 /* Refer https://reactnavigation.org/docs/material-top-tab-navigator */
 
-const HomeScreen = ({ navigation }) => {
-    return (
-        <View
-            style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
-        >
-            <Button
-                onPress={() => navigation.navigate('Tab2')}
-                title="Go to Tab2"
-            />
-        </View>
-    );
-};
-
 const MatTabTop = () => {
+    const navigation = useNavigation();
+
+    const HomeScreen = () => {
+        return (
+            <View
+                style={{
+                    flex: 1,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
+                <Button
+                    onPress={() => navigation.navigate('Tab2')}
+                    title="Go to Tab2"
+                />
+            </View>
+        );
+    };
+
     return (
         // <NavigationContainer>
         <Tab.Navigator

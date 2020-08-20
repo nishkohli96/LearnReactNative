@@ -164,9 +164,6 @@ const styles = StyleSheet.create({
 
 /* To prevent the linting err */
 NavList.propTypes = {
-    navigation: PropTypes.shape({
-        navigate: PropTypes.func.isRequired,
-    }).isRequired,
     itemObject: PropTypes.object,
     onItemPress: PropTypes.func,
     panelCollapse: PropTypes.bool,

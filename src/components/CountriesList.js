@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Countries } from '../constants/Countries';
-import PropTypes from 'prop-types';
+import { useNavigation } from '@react-navigation/native';
 
-const CountriesList = ({ navigation }) => {
+const CountriesList = () => {
+    const navigation = useNavigation();
     const viewCountry = (country) => {
         navigation.navigate('ListItemPageRoute', {
             name: country.country_name,
@@ -44,11 +45,5 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
 });
-
-CountriesList.propTypes = {
-    navigation: PropTypes.shape({
-        navigate: PropTypes.func.isRequired,
-    }).isRequired,
-};
 
 export default CountriesList;

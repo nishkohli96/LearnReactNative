@@ -1,6 +1,5 @@
 import React from 'react';
 import { Text, View, Image, StyleSheet } from 'react-native';
-import PropTypes from 'prop-types';
 
 /* Displaying the passed values in Route, of a country from Listdata.js */
 
@@ -46,10 +45,5 @@ const styles = StyleSheet.create({
         resizeMode: 'stretch',
     },
 });
-
-/* To prevent the linting err */
-ListItemPageRoute.propTypes = {
-    route: PropTypes.route,
-};
 
 export default ListItemPageRoute;

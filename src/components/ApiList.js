@@ -8,7 +8,7 @@ import {
     TouchableOpacity,
     Text,
 } from 'react-native';
-import PropTypes from 'prop-types';
+import { useNavigation } from '@react-navigation/native';
 
 const renderItem = ({ item }) => <Item title={item.name} />;
 
@@ -18,7 +18,8 @@ const Item = ({ title }) => (
     </View>
 );
 
-const ApiList = ({ navigation }) => {
+const ApiList = () => {
+    const navigation = useNavigation();
     const [pokeList, setPokeList] = useState([]);
 
     async function getPokeList() {
@@ -106,13 +107,5 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
 });
-
-/* To prevent the linting err */
-ApiList.propTypes = {
-    navigation: PropTypes.shape({
-        navigate: PropTypes.func.isRequired,
-    }).isRequired,
-    title: PropTypes.string,
-};
 
 export default ApiList;
