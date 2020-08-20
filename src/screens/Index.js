@@ -16,34 +16,12 @@ import FlexView from '../components/FlexView';
 import MatTabTop from './MatTabTop';
 import MatTabBottom from './MatTabBottom';
 import NavDrawer from './NavDrawer';
-
-/* Srch icons from
-	https://oblador.github.io/react-native-vector-icons/
-*/
-import Icon from 'react-native-vector-icons/Feather';
+import AppSettings from './AppSettings';
 
 /* To add a new route, make sure to add item in Listdata.js */
 const Stack = createStackNavigator();
 
 const Index = () => {
-    const clickMe = () => {
-        console.log('Open settings');
-        // navigation.navigate('LinkinginApps');
-    };
-
-    const headerRightBtn = () => {
-        return (
-            <View style={{ marginRight: 20 }}>
-                <Icon
-                    name="settings"
-                    size={25}
-                    color="#900"
-                    onPress={clickMe}
-                ></Icon>
-            </View>
-        );
-    };
-
     return (
         <NavigationContainer>
             {/* Setting Default Props of header across all screens  */}
@@ -57,30 +35,18 @@ const Index = () => {
                     headerTitleStyle: {
                         fontWeight: 'bold',
                     },
-                    headerRight: headerRightBtn,
                 }}
             >
                 <Stack.Screen
                     name="NavList"
                     component={NavList}
-                    options={{
-                        title: 'Navlist',
-                        headerTintColor: 'yellow',
-                        headerStyle: {
-                            backgroundColor: '#007aba',
-                        },
-                        headerTitleAlign: 'center',
-                    }}
+                    options={{ headerShown: false }}
                 />
                 <Stack.Screen name="BasicUI" component={BasicUI} />
                 <Stack.Screen name="LinkinginApps" component={LinkinginApps} />
                 <Stack.Screen name="Modal" component={ModalComponent} />
                 {/* <Stack.Screen name="MatTabBottom" component={MatTabBottom} /> */}
-                <Stack.Screen
-                    name="CountriesList"
-                    component={CountriesList}
-                    // options={{ headerShown: false }}
-                />
+                <Stack.Screen name="CountriesList" component={CountriesList} />
                 <Stack.Screen
                     name="FlexView"
                     component={FlexView}
@@ -96,6 +62,11 @@ const Index = () => {
                     name="ApiList"
                     component={ApiList}
                     options={{ title: 'Pokemon List' }}
+                />
+                <Stack.Screen
+                    name="AppSettings"
+                    component={AppSettings}
+                    options={{ title: 'Settings' }}
                 />
                 <Stack.Screen name="WebViewComp" component={WebViewComp} />
                 <Stack.Screen

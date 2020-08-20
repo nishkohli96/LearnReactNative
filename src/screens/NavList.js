@@ -7,14 +7,18 @@ import {
     StyleSheet,
     TouchableOpacity,
     Image,
+    StatusBar,
 } from 'react-native';
 import { Listdata } from '../constants/Listdata';
 import Collapsible from 'react-native-collapsible';
 import PropTypes from 'prop-types';
 import { useNavigation } from '@react-navigation/native';
 
+import Header from '../components/Header';
+
 const NavList = () => {
     const navigation = useNavigation(); /* Navigation Hook */
+
     /* Back Button Implementation For Android, to Close the app in this case */
     useEffect(() => {
         const backAction = () => {
@@ -109,6 +113,8 @@ const NavList = () => {
 
     return (
         <View style={styles.listContainer}>
+            <StatusBar backgroundColor="#007aba" />
+            <Header title="NavList" navigate={navigation} />
             <Text style={styles.headerText}>
                 Please Click on the List Item for Demo, or expand the item,for
                 brief description. Code in same file as the item name
@@ -125,7 +131,6 @@ const NavList = () => {
 const styles = StyleSheet.create({
     listContainer: {
         flex: 1,
-        marginTop: 20,
     },
     headerText: {
         color: 'blue',
