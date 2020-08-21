@@ -2,7 +2,12 @@
 
 export const THEME = {
     name: 'Theme',
+    value: 'Light',
     options: ['Light', 'Dark', 'SoVeryBlue'],
 };
 
-export const LANGUAGE = { name: 'Language', options: ['English', 'French'] };
+export const LANGUAGE = {
+    name: 'Language',
+    value: 'English',
+    options: ['English', 'French'],
+};

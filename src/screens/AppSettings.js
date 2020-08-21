@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
     View,
     StyleSheet,
@@ -13,17 +13,18 @@ import { THEME, LANGUAGE } from '../constants/Settings';
 
 const AppSettings = () => {
     const [modalVisible, setModalVisible] = useState(false);
+    const [modalTitle, setModalTitle] = useState('');
     const [modalData, setModalData] = useState([]);
-    const [modalTitle, setModalTitle] = useState(THEME.options);
-    const [theme, setTheme] = useState(THEME.options[0]);
-    const [lang, setLang] = useState(LANGUAGE.options[1]);
+    const [radiogrpValue, setRadiogpValue] = useState('');
+    const [theme, setTheme] = useState(THEME.value);
+    const [lang, setLang] = useState(LANGUAGE.value);
 
-    const SettingsItem = ({ settings, iconName, iconColor, value }) => {
+    const SettingsItem = ({ settings, iconName, iconColor }) => {
         return (
             <TouchableHighlight
                 underlayColor="skyblue"
                 onPress={() => {
-                    openSettingsModal(settings.name, settings);
+                    openSettingsModal(settings);
                 }}
             >
                 <View style={styles.itemRow}>
@@ -37,7 +38,10 @@ const AppSettings = () => {
                     <View style={styles.textContainer}>
                         <Text style={styles.headerText}> {settings.name} </Text>
                         <View style={styles.textContainer}>
-                            <Text style={styles.subText}> {value} </Text>
+                            <Text style={styles.subText}>
+                                {' '}
+                                {settings.value}{' '}
+                            </Text>
                         </View>
                     </View>
                 </View>
@@ -45,11 +49,11 @@ const AppSettings = () => {
         );
     };
 
-    const openSettingsModal = (title, settings) => {
-        console.log('p', settings);
-        setModalTitle(title);
-        setModalData(settings);
+    const openSettingsModal = (settings) => {
+        setModalTitle(settings.name);
+        setModalData(settings.options);
         setModalVisible(!modalVisible);
+        setRadiogpValue(settings.value);
     };
 
     const ModalElement = () => {
@@ -65,18 +69,18 @@ const AppSettings = () => {
                         <Text style={styles.modalHeader}>
                             Choose {modalTitle}
                         </Text>
-                        <SettingsRadioBtn settings={modalData} />
+                        <SettingsRadioBtn />
 
                         <TouchableHighlight
                             style={{
-                                ...styles.openButton,
-                                backgroundColor: '#2196F3',
+                                marginTop: 20,
+                                padding: 5,
                             }}
                             onPress={() => {
                                 setModalVisible(!modalVisible);
                             }}
                         >
-                            <Text style={styles.textStyle}>Hide Modal</Text>
+                            <Text style={styles.textStyle}>CLOSE</Text>
                         </TouchableHighlight>
                     </View>
                 </View>
@@ -85,22 +89,20 @@ const AppSettings = () => {
     };
 
     function SettingsRadioBtn() {
-        console.log(' modaldata is ', modalData.options);
-        let value = modalData.name === THEME.name ? theme : lang;
         return (
             <View>
                 <RadioButton.Group
-                    onValueChange={(value) => setTheme(value)}
-                    value={value}
+                    onValueChange={(value) => changeSetting(value)}
+                    value={radiogrpValue}
+                    style={{ backgroundColor: 'purple' }}
                 >
-                    {modalData.options.map((option) => (
+                    {modalData.map((option) => (
                         <View key={option}>
                             <View style={styles.radiobtn}>
                                 <RadioButton value={option} />
                             </View>
                             {/* <View style={styles.radiobtnTxt}> */}
                             <Text style={styles.radiobtnTxt}> {option}</Text>
-                            {/* </View> */}
                         </View>
                     ))}
                 </RadioButton.Group>
@@ -108,11 +110,15 @@ const AppSettings = () => {
         );
     }
 
-    const changeSetting = (setting, option) => {
-        // THEME.selectedIndex = index;
-        // setTheme(index);
-        console.log(setting);
-        console.log(option);
+    const changeSetting = (value) => {
+        setRadiogpValue(value);
+        if (modalTitle === THEME.name) {
+            setTheme(value);
+            THEME.value = value;
+        } else {
+            setLang(value);
+            LANGUAGE.value = value;
+        }
     };
 
     return (
@@ -122,13 +128,11 @@ const AppSettings = () => {
                     settings={THEME}
                     iconName="palette"
                     iconColor="#ebde34"
-                    value="Dark"
                 />
                 <SettingsItem
                     settings={LANGUAGE}
                     iconName="language"
                     iconColor="silver"
-                    value="English"
                 />
                 <ModalElement />
             </View>
@@ -188,11 +192,16 @@ const styles = StyleSheet.create({
     },
     radiobtn: {
         marginTop: 5,
+        marginBottom: 5,
     },
     radiobtnTxt: {
         marginLeft: 45,
-        marginTop: -33,
+        marginTop: -35,
         fontSize: 21,
+    },
+    textStyle: {
+        fontSize: 17,
+        alignSelf: 'flex-end',
     },
 });
 
