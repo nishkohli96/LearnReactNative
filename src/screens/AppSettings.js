@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
     View,
-    Text,
     StyleSheet,
     TouchableHighlight,
     Modal,
@@ -9,27 +8,22 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { vw } from 'react-native-expo-viewport-units';
-
+import { RadioButton, Text } from 'react-native-paper';
 import { THEME, LANGUAGE } from '../constants/Settings';
-import RadioForm, {
-    RadioButton,
-    RadioButtonInput,
-    RadioButtonLabel,
-} from 'react-native-simple-radio-button';
 
 const AppSettings = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [modalData, setModalData] = useState([]);
-    const [modalTitle, setModalTitle] = useState('');
-    const [themeIndex, setTheme] = useState(THEME.selectedIndex);
-    const [langIndex, setLang] = useState(LANGUAGE.selectedIndex);
+    const [modalTitle, setModalTitle] = useState(THEME.options);
+    const [theme, setTheme] = useState(THEME.options[0]);
+    const [lang, setLang] = useState(LANGUAGE.options[1]);
 
-    const SettingsItem = ({ title, iconName, iconColor, value, settings }) => {
+    const SettingsItem = ({ settings, iconName, iconColor, value }) => {
         return (
             <TouchableHighlight
                 underlayColor="skyblue"
                 onPress={() => {
-                    openSettingsModal(title, settings);
+                    openSettingsModal(settings.name, settings);
                 }}
             >
                 <View style={styles.itemRow}>
@@ -41,7 +35,7 @@ const AppSettings = () => {
                         ></Icon>
                     </View>
                     <View style={styles.textContainer}>
-                        <Text style={styles.headerText}> {title} </Text>
+                        <Text style={styles.headerText}> {settings.name} </Text>
                         <View style={styles.textContainer}>
                             <Text style={styles.subText}> {value} </Text>
                         </View>
@@ -52,6 +46,7 @@ const AppSettings = () => {
     };
 
     const openSettingsModal = (title, settings) => {
+        console.log('p', settings);
         setModalTitle(title);
         setModalData(settings);
         setModalVisible(!modalVisible);
@@ -71,6 +66,7 @@ const AppSettings = () => {
                             Choose {modalTitle}
                         </Text>
                         <SettingsRadioBtn settings={modalData} />
+
                         <TouchableHighlight
                             style={{
                                 ...styles.openButton,
@@ -88,68 +84,51 @@ const AppSettings = () => {
         );
     };
 
-    const changeSetting = (setting, index) => {
-        setting.name === THEME.name ? setTheme(index) : setLang(index);
-        setting.selectedIndex = index;
-        console.log(setting);
-    };
-
-    const SettingsRadioBtn = ({ settings }) => {
+    function SettingsRadioBtn() {
+        console.log(' modaldata is ', modalData.options);
+        let value = modalData.name === THEME.name ? theme : lang;
         return (
-            <RadioForm formHorizontal={false} animation={false}>
-                {settings.options.map((obj, i) => (
-                    <RadioButton labelHorizontal={true} key={i}>
-                        <RadioButtonInput
-                            obj={obj}
-                            index={i}
-                            borderWidth={1}
-                            buttonInnerColor={'darkgreen'}
-                            buttonOuterColor={
-                                i === settings.selectedIndex
-                                    ? 'darkgreen'
-                                    : 'grey'
-                            }
-                            buttonSize={15}
-                            isSelected={i === themeIndex}
-                            buttonOuterSize={25}
-                            buttonStyle={{}}
-                            buttonWrapStyle={{ marginTop: 10 }}
-                            onPress={() => {
-                                changeSetting(obj, i);
-                            }}
-                        />
-                        <RadioButtonLabel
-                            obj={obj}
-                            index={i}
-                            labelHorizontal={true}
-                            labelStyle={{ fontSize: 20, color: '#2ecc71' }}
-                            labelWrapStyle={{ marginTop: 10 }}
-                            onPress={() => {
-                                changeSetting(obj, i);
-                            }}
-                        />
-                    </RadioButton>
-                ))}
-            </RadioForm>
+            <View>
+                <RadioButton.Group
+                    onValueChange={(value) => setTheme(value)}
+                    value={value}
+                >
+                    {modalData.options.map((option) => (
+                        <View key={option}>
+                            <View style={styles.radiobtn}>
+                                <RadioButton value={option} />
+                            </View>
+                            {/* <View style={styles.radiobtnTxt}> */}
+                            <Text style={styles.radiobtnTxt}> {option}</Text>
+                            {/* </View> */}
+                        </View>
+                    ))}
+                </RadioButton.Group>
+            </View>
         );
+    }
+
+    const changeSetting = (setting, option) => {
+        // THEME.selectedIndex = index;
+        // setTheme(index);
+        console.log(setting);
+        console.log(option);
     };
 
     return (
         <ScrollView>
             <View style={styles.container}>
                 <SettingsItem
-                    title={THEME.name}
+                    settings={THEME}
                     iconName="palette"
                     iconColor="#ebde34"
                     value="Dark"
-                    settings={THEME}
                 />
                 <SettingsItem
-                    title={LANGUAGE.name}
+                    settings={LANGUAGE}
                     iconName="language"
                     iconColor="silver"
                     value="English"
-                    settings={LANGUAGE}
                 />
                 <ModalElement />
             </View>
@@ -201,11 +180,19 @@ const styles = StyleSheet.create({
         fontSize: 25,
         fontWeight: 'bold',
         color: 'purple',
-        marginBottom: 10,
+        marginBottom: 7,
     },
     centeredView: {
         flex: 1,
         justifyContent: 'center',
+    },
+    radiobtn: {
+        marginTop: 5,
+    },
+    radiobtnTxt: {
+        marginLeft: 45,
+        marginTop: -33,
+        fontSize: 21,
     },
 });
 
