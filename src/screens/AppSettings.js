@@ -70,18 +70,14 @@ const AppSettings = () => {
                             Choose {modalTitle}
                         </Text>
                         <SettingsRadioBtn />
-
-                        <TouchableHighlight
-                            style={{
-                                marginTop: 20,
-                                padding: 5,
-                            }}
+                        <Text
+                            style={styles.textStyle}
                             onPress={() => {
                                 setModalVisible(!modalVisible);
                             }}
                         >
-                            <Text style={styles.textStyle}>CLOSE</Text>
-                        </TouchableHighlight>
+                            CLOSE
+                        </Text>
                     </View>
                 </View>
             </Modal>
@@ -201,6 +197,7 @@ const styles = StyleSheet.create({
     },
     textStyle: {
         fontSize: 17,
+        marginTop: 10,
         alignSelf: 'flex-end',
     },
 });
