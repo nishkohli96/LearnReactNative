@@ -2,9 +2,13 @@ import React from 'react';
 
 import Index from './src/screens/Index';
 import NestedNav from './src/screens/NestedNav';
-
+import AppContextProvider from './AppContextProvider';
 export default function App() {
-    return <Index />;
+    return (
+        <AppContextProvider>
+    <Index />
+    </AppContextProvider>
+    );
     // return <NestedNav />;
 }
 

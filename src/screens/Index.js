@@ -28,7 +28,7 @@ const Stack = createStackNavigator();
 const Index = () => {
     return (
         // <AppearanceProvider>
-        <NavigationContainer theme={SoVeryBlue}>
+        <NavigationContainer>
             {/* Setting Default Props of header across all screens  */}
             <Stack.Navigator
                 initialRouteName="NavList"
