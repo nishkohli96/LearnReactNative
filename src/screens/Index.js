@@ -1,8 +1,6 @@
 import React from 'react';
-import { View } from 'react-native';
-import { NavigationContainer, DarkTheme } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { AppearanceProviders } from 'react-native-appearance';
 
 import NavList from './NavList';
 
@@ -28,7 +26,7 @@ const Stack = createStackNavigator();
 const Index = () => {
     return (
         // <AppearanceProvider>
-        <NavigationContainer>
+        <NavigationContainer theme={SoVeryBlue}>
             {/* Setting Default Props of header across all screens  */}
             <Stack.Navigator
                 initialRouteName="NavList"
