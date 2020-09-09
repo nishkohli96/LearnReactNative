@@ -10,21 +10,29 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import { vw } from 'react-native-expo-viewport-units';
 import { RadioButton, Text } from 'react-native-paper';
 import { THEME, LANGUAGE } from '../constants/Settings';
+import { ThemeToggleContext } from '../context/ThemeContext';
+import { ThemedView, ThemedText } from '../styled-components/Themed-Comps';
 
 const AppSettings = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [modalTitle, setModalTitle] = useState('');
     const [modalData, setModalData] = useState([]);
     const [radiogrpValue, setRadiogpValue] = useState('');
-    const [theme, setTheme] = useState(THEME.value);
     const [lang, setLang] = useState(LANGUAGE.value);
 
-    const SettingsItem = ({ settings, iconName, iconColor }) => {
+    const { theme, changeTheme } = React.useContext(ThemeToggleContext);
+
+    const SettingsItem = ({
+        settings,
+        currentSetting,
+        iconName,
+        iconColor,
+    }) => {
         return (
             <TouchableHighlight
                 underlayColor="skyblue"
                 onPress={() => {
-                    openSettingsModal(settings);
+                    openSettingsModal(settings, currentSetting);
                 }}
             >
                 <View style={styles.itemRow}>
@@ -38,10 +46,7 @@ const AppSettings = () => {
                     <View style={styles.textContainer}>
                         <Text style={styles.headerText}> {settings.name} </Text>
                         <View style={styles.textContainer}>
-                            <Text style={styles.subText}>
-                                {' '}
-                                {settings.value}{' '}
-                            </Text>
+                            <Text style={styles.subText}>{settings.value}</Text>
                         </View>
                     </View>
                 </View>
@@ -49,11 +54,11 @@ const AppSettings = () => {
         );
     };
 
-    const openSettingsModal = (settings) => {
+    const openSettingsModal = (settings, currentSetting) => {
         setModalTitle(settings.name);
         setModalData(settings.options);
         setModalVisible(!modalVisible);
-        setRadiogpValue(settings.value);
+        setRadiogpValue(currentSetting);
     };
 
     const ModalElement = () => {
@@ -93,12 +98,15 @@ const AppSettings = () => {
                     style={{ backgroundColor: 'purple' }}
                 >
                     {modalData.map((option) => (
-                        <View key={option}>
+                        <View key={option.value}>
                             <View style={styles.radiobtn}>
-                                <RadioButton value={option} />
+                                <RadioButton value={option.value} />
                             </View>
                             {/* <View style={styles.radiobtnTxt}> */}
-                            <Text style={styles.radiobtnTxt}> {option}</Text>
+                            <Text style={styles.radiobtnTxt}>
+                                {' '}
+                                {option.name}
+                            </Text>
                         </View>
                     ))}
                 </RadioButton.Group>
@@ -106,14 +114,19 @@ const AppSettings = () => {
         );
     }
 
+    const getSettingsText = (settings, value) => {
+        const res = settings.options.filter((option) => option.value === value);
+        return res[0].name;
+    };
     const changeSetting = (value) => {
         setRadiogpValue(value);
         if (modalTitle === THEME.name) {
-            setTheme(value);
-            THEME.value = value;
+            changeTheme(value);
+            THEME.value = getSettingsText(THEME, value);
         } else {
             setLang(value);
             LANGUAGE.value = value;
+            LANGUAGE.value = getSettingsText(LANGUAGE, value);
         }
     };
 
@@ -122,16 +135,21 @@ const AppSettings = () => {
             <View style={styles.container}>
                 <SettingsItem
                     settings={THEME}
+                    currentSetting={theme}
                     iconName="palette"
                     iconColor="#ebde34"
                 />
                 <SettingsItem
                     settings={LANGUAGE}
+                    currentSetting={LANGUAGE.value}
                     iconName="language"
                     iconColor="silver"
                 />
                 <ModalElement />
             </View>
+            <ThemedView>
+                <ThemedText>Themed Text inside a themed view</ThemedText>
+            </ThemedView>
         </ScrollView>
     );
 };

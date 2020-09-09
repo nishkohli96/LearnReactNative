@@ -3,11 +3,18 @@
 export const THEME = {
     name: 'Theme',
     value: 'Light',
-    options: ['Light', 'Dark', 'SoVeryBlue'],
+    options: [
+        { name: 'Light', value: 'light' },
+        { name: 'Dark', value: 'dark' },
+        { name: 'Blue', value: 'blue' },
+    ],
 };
 
 export const LANGUAGE = {
     name: 'Language',
     value: 'English',
-    options: ['English', 'French'],
+    options: [
+        { name: 'English', value: 'en' },
+        { name: 'French', value: 'fr' },
+    ],
 };

@@ -3,7 +3,7 @@ import React from 'react';
 import Index from './src/screens/Index';
 import NestedNav from './src/screens/NestedNav';
 export default function App() {
-    return  <Index />
+    return <Index />;
     // return <NestedNav />;
 }
 

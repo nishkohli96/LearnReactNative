@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-
+import { View, StyleSheet } from 'react-native';
+import { ThemedText, ThemedHeader } from '../styled-components/Themed-Comps';
 /* Srch icons from
 	https://oblador.github.io/react-native-vector-icons/
 */
@@ -12,9 +12,9 @@ const Header = ({ title, navigate }) => {
     };
 
     return (
-        <View style={styles.headerBar}>
+        <ThemedHeader style={styles.headerBar}>
             <View style={styles.textContainer}>
-                <Text style={styles.headerText}>{title}</Text>
+                <ThemedText style={styles.headerText}>{title}</ThemedText>
             </View>
             <View style={styles.iconContainer}>
                 <Icon
@@ -24,13 +24,13 @@ const Header = ({ title, navigate }) => {
                     onPress={clickMe}
                 ></Icon>
             </View>
-        </View>
+        </ThemedHeader>
     );
 };
 
 const styles = StyleSheet.create({
     headerBar: {
-        backgroundColor: '#007aba',
+        // backgroundColor: '#007aba',
         height: 50,
         flexDirection: 'row',
         padding: 10,
@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
         paddingRight: 10,
     },
     headerText: {
-        color: 'yellow',
         fontSize: 20,
     },
 });

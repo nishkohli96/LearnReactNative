@@ -14,9 +14,11 @@ import Collapsible from 'react-native-collapsible';
 import PropTypes from 'prop-types';
 import { useNavigation } from '@react-navigation/native';
 
+import { ThemedStatusBar, ThemedView } from '../styled-components/Themed-Comps';
 import Header from '../components/Header';
+import { StyledView, StyledText } from '../styled-components/Styled-Comps';
 
-const NavList = () => {
+const NavList = (props) => {
     const navigation = useNavigation(); /* Navigation Hook */
 
     /* Back Button Implementation For Android, to Close the app in this case */
@@ -78,11 +80,11 @@ const NavList = () => {
                 </View>
             </View>
             <Collapsible collapsed={itemObject.collapsed} align="center">
-                <View style={styles.content}>
-                    <Text style={{ textAlign: 'center' }}>
+                <StyledView>
+                    <StyledText style={{ textAlign: 'center' }}>
                         {itemObject.description}
-                    </Text>
-                </View>
+                    </StyledText>
+                </StyledView>
             </Collapsible>
         </View>
     );
@@ -112,19 +114,23 @@ const NavList = () => {
     }
 
     return (
-        <View style={styles.listContainer}>
+        <ThemedView style={styles.listContainer}>
+            {/* <ThemedStatusBar /> */}
             <StatusBar backgroundColor="#007aba" />
             <Header title="NavList" navigate={navigation} />
-            <Text style={styles.headerText}>
-                Please Click on the List Item for Demo, or expand the item,for
-                brief description. Code in same file as the item name
-            </Text>
+            <StyledView>
+                <StyledText style={styles.headerText}>
+                    Please Click on the List Item for Demo, or expand the
+                    item,for brief description. Code in same file as the item
+                    name
+                </StyledText>
+            </StyledView>
             <FlatList
                 data={Listdata}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.index}
             />
-        </View>
+        </ThemedView>
     );
 };
 
@@ -133,7 +139,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     headerText: {
-        color: 'blue',
+        // color: 'blue',
         fontSize: 15,
         padding: 10,
     },

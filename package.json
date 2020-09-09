@@ -46,7 +46,8 @@
         "react-native-tab-view": "^2.15.1",
         "react-native-vector-icons": "^7.0.0",
         "react-native-web": "~0.11.7",
-        "react-native-webview": "^10.4.1"
+        "react-native-webview": "^10.4.1",
+        "styled-components": "^5.2.0"
     },
     "devDependencies": {
         "@babel/core": "^7.8.6",

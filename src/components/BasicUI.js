@@ -10,6 +10,7 @@ import {
     StatusBar,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { ThemedView, ThemedText } from '../styled-components/Themed-Comps';
 
 const BasicUI = () => {
     const [isEnabled, setIsEnabled] = useState(false);
@@ -28,9 +29,10 @@ const BasicUI = () => {
     }
 
     return (
-        <View style={styles.container}>
+        <ThemedView style={styles.container}>
             {/* <StatusBar backgroundColor="blue" hidden  />   */}
-            <StatusBar backgroundColor="#007aba" />
+            <StatusBar backgroundColor="crimson" />
+            <ThemedText>Themed Text Inside a Themed View</ThemedText>
             <View style={styles.buttonContainer}>
                 <Button
                     onPress={_onPressButton}
@@ -64,7 +66,7 @@ const BasicUI = () => {
                     Login with Facebook
                 </Icon.Button>
             </View>
-        </View>
+        </ThemedView>
     );
 };
 
