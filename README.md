@@ -21,3 +21,8 @@ Run the Project using the following command
 # Scan QR on your device after installing Expo app from App/Play Store
 yarn start
 ```
+## Features
+
+- App Onboarding Screen
+- Implement majority of the [React-Native](https://reactnative.dev/) components
+- Theming & Styles using [Styled Components](https://styled-components.com/)
