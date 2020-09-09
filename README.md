@@ -1,6 +1,6 @@
 # LearnReactNative
 
-My Style of Learning [React-Native](https://reactnative.dev/) while Coding by making this app, that demonstrates a PoC of various components and functionality in Mobile Apps, from buttons to fetching data from server.
+My Style of Learning [React-Native](https://reactnative.dev/) by making this app, that demonstrates a PoC of various components and functionality in Mobile Apps, from buttons to fetching data from server.
 
 This Project has been made using [expo.io](https://expo.io/).
 I have mainly tested this App on an Android device, and would be later testing the same on
