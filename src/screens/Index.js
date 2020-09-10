@@ -2,6 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import IntroScreen from './IntroScreens/IntroScreen';
 import NavList from './NavList';
 
 import BasicUI from '../components/BasicUI';
@@ -30,7 +31,7 @@ const Index = () => {
             <NavigationContainer theme={LightTheme}>
                 {/* Setting Default Props of header across all screens  */}
                 <Stack.Navigator
-                    initialRouteName="NavList"
+                    initialRouteName="IntroScreen"
                     screenOptions={{
                         headerStyle: {
                             backgroundColor: '#f4511e',
@@ -41,6 +42,11 @@ const Index = () => {
                         },
                     }}
                 >
+                    <Stack.Screen
+                        name="IntroScreen"
+                        component={IntroScreen}
+                        options={{ headerShown: false }}
+                    />
                     <Stack.Screen
                         name="NavList"
                         component={NavList}

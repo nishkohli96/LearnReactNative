@@ -1,83 +1,67 @@
-import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View, Alert } from 'react-native';
-import AppIntro from 'react-native-app-intro';
+import React from 'react';
+import { Text, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import Onboarding from 'react-native-onboarding-swiper';
+import { AsyncStorage } from 'react-native';
 
-import IntroScreen1 from './IntroScreen1';
-import IntroScreen2 from './IntroScreen2';
-import IntroScreen3 from './IntroScreen3';
+const IntroScreen = () => {
 
-const styles = StyleSheet.create({
-    slide: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#9DD6EB',
-        padding: 15,
-    },
-    text: {
-        color: '#fff',
-        fontSize: 30,
-        fontWeight: 'bold',
-    },
-});
-
-class IntroScreen extends Component {
-    onSkipBtnHandle = (index) => {
-        Alert.alert('Skip');
-        console.log(index);
+    const navigation = useNavigation(); /* Navigation Hook */
+    
+    const gotoMainPage = async () => {
+        await AsyncStorage.setItem('firstTime','false');
+        navigation.navigate('NavList');
     };
 
-    doneBtnHandle = () => {
-        Alert.alert('Done');
-    };
-    nextBtnHandle = (index) => {
-        Alert.alert('Next');
-        console.log(index);
-    };
-
-    onSlideChangeHandle = (index, total) => {
-        console.log(index, total);
-    };
-
-    render() {
-        console.log(AppIntro);
-
-        return (
-            <AppIntro
-                onNextBtnClick={this.nextBtnHandle}
-                onDoneBtnClick={this.doneBtnHandle}
-                onSkipBtnClick={this.onSkipBtnHandle}
-                onSlideChange={this.onSlideChangeHandle}
-            >
-                <View style={styles.slide}>
-                    <IntroScreen1 />
-                </View>
-
-                <View style={styles.slide}>
-                    <IntroScreen2 />
-                </View>
-
-                <View style={styles.slide}>
-                    <IntroScreen3 />
-                </View>
-
-                <View style={[styles.slide, { backgroundColor: '#a4b602' }]}>
-                    <View level={5}>
-                        <Text style={styles.text}>Page 4</Text>
-                    </View>
-                    <View level={10}>
-                        <Text style={styles.text}>Page 4</Text>
-                    </View>
-                    <View level={15}>
-                        <Text style={styles.text}>Page 4</Text>
-                    </View>
-                </View>
-            </AppIntro>
-            // <View level={15}>
-            //     <Text style={styles.text}>Page 4</Text>
-            // </View>
-        );
+    const checkFirstUse = async() => {
+        let appFirstTime = await AsyncStorage.getItem('firstTime');
+        console.log('first tim ? ', appFirstTime);
+        if(appFirstTime === null){
+            console.log('set item')
+            await AsyncStorage.setItem('firstTime','true');
+        }
+        if(appFirstTime === 'false') {
+            navigation.navigate('NavList');
+        }
     }
-}
-AppRegistry.registerComponent('IntroScreen', () => IntroScreen);
+    const DoneBtn = () => {
+        return <Text onPress={() => gotoMainPage()}>Done</Text>;
+    };
+
+    checkFirstUse();
+
+    /* Refer https://www.npmjs.com/package/react-native-onboarding-swiper  */
+    return (
+        <Onboarding
+            onSkip={() => gotoMainPage()}
+            onDone={() => gotoMainPage()}
+            DoneButtonComponent={DoneBtn}
+            pages={[
+                {
+                    backgroundColor: 'skyblue',
+                    image: <Image source={require('../../assets/icon.png')} />,
+                    title: 'Welcome To LearnReactNative',
+                    subtitle: 'Learn Fundamentals of React-Native',
+                },
+                {
+                    backgroundColor: 'red',
+                    image: (
+                        <Image source={require('../../assets/favicon.png')} />
+                    ),
+                    title: 'Demos in the form of a List',
+                    subtitle: 'Touch to view or expand for its description',
+                },
+                {
+                    backgroundColor: 'yellow',
+                    image: (
+                        <Image source={require('../../assets/favicon.png')} />
+                    ),
+                    title: 'Enjoy....',
+                    subtitle: 'Feel Free to Edit the Code and Experiment',
+                },
+            ]}
+        />
+    );
+};
+
 export default IntroScreen;

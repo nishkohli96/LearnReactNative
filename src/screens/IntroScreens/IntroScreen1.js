@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, Button } from 'react-native';
 
 export default class IntroScreen1 extends Component {
     render() {
@@ -14,6 +14,9 @@ export default class IntroScreen1 extends Component {
                     Learn react-native with plenty of examples that most apps
                     use
                 </Text>
+                <View style={styles.skipbtn}>
+                    <Button title="Skip" color="crimson" />
+                </View>
             </View>
         );
     }
@@ -24,6 +27,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'orange',
         color: 'yellow',
         flex: 1,
+        padding: 15,
     },
     textStyle: {
         fontSize: 30,
@@ -34,5 +38,8 @@ const styles = StyleSheet.create({
         width: 200,
         height: 200,
         resizeMode: 'stretch',
+    },
+    skipbtn: {
+        justifyContent: 'flex-start',
     },
 });

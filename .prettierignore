@@ -1,12 +1,16 @@
 .expo
 .expo-shared
-src/assets
+
 node_modules
+
+src/assets
+src/styled-components/Themed-Comps.js
 .gitignore
 .prettierignore
 .eslintrc.json
 app.json
 babel.config.js
+
 yarn.lock
 yarn-error.log
 README.md
