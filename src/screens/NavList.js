@@ -14,38 +14,43 @@ import Collapsible from 'react-native-collapsible';
 import PropTypes from 'prop-types';
 import { useNavigation } from '@react-navigation/native';
 
-import { ThemedStatusBar, ThemedView } from '../styled-components/Themed-Comps';
+import { ThemedView } from '../styled-components/Themed-Comps';
 import Header from '../components/Header';
 import { StyledView, StyledText } from '../styled-components/Styled-Comps';
 
-const NavList = (props) => {
+const NavList = () => {
     const navigation = useNavigation(); /* Navigation Hook */
+
+    const backAction = () => {
+        if (Platform.OS === 'android') {
+            Alert.alert('Hold on!', 'Close the App?', [
+                {
+                    text: 'Cancel',
+                    onPress: () => null,
+                    style: 'cancel',
+                },
+                {
+                    text: 'YES',
+                    onPress: () => BackHandler.exitApp(),
+                },
+            ]);
+        }
+        return true;
+    };
 
     /* Back Button Implementation For Android, to Close the app in this case */
     useEffect(() => {
-        const backAction = () => {
-            if (Platform.OS === 'android') {
-                Alert.alert('Hold on!', 'Close the App?', [
-                    {
-                        text: 'Cancel',
-                        onPress: () => null,
-                        style: 'cancel',
-                    },
-                    {
-                        text: 'YES',
-                        onPress: () => BackHandler.exitApp(),
-                    },
-                ]);
-            }
-            return true;
-        };
 
-        const backHandler = BackHandler.addEventListener(
+        BackHandler.addEventListener(
             'hardwareBackPress',
             backAction
         );
 
-        return () => backHandler.remove();
+        return () => { console.log('unmount component');
+        BackHandler.removeEventListener(
+            'hardwareBackPress',
+            backAction
+        );}
     }, []);
 
     const expand_icon = require('../assets/icons/expand-icon.png');
