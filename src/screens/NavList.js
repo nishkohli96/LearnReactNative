@@ -13,6 +13,7 @@ import { Listdata } from '../constants/Listdata';
 import Collapsible from 'react-native-collapsible';
 import PropTypes from 'prop-types';
 import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
 
 import { ThemedView } from '../styled-components/Themed-Comps';
 import Header from '../components/Header';
@@ -39,18 +40,11 @@ const NavList = () => {
     };
 
     /* Back Button Implementation For Android, to Close the app in this case */
-    useEffect(() => {
+    useFocusEffect(() => {
+        BackHandler.addEventListener('hardwareBackPress', backAction);
 
-        BackHandler.addEventListener(
-            'hardwareBackPress',
-            backAction
-        );
-
-        return () => { console.log('unmount component');
-        BackHandler.removeEventListener(
-            'hardwareBackPress',
-            backAction
-        );}
+        return () =>
+            BackHandler.removeEventListener('hardwareBackPress', backAction);
     }, []);
 
     const expand_icon = require('../assets/icons/expand-icon.png');

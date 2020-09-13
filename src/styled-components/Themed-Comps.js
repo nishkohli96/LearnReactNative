@@ -9,7 +9,7 @@ export const ThemedHeader = styled.View`
 `;
 
 export const ThemedText = styled.Text`
-    color: ${(props) => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.text};
 `;
 
 export const ThemedStatusBar = styled.StatusBar`

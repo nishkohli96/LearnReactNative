@@ -133,7 +133,7 @@ const AppSettings = () => {
     return (
         <ScrollView>
             <ThemedView style={styles.container}>
-                <Text style={styles.pageHeader}>Settings</Text>
+                <ThemedText style={styles.pageHeader}>Settings</ThemedText>
                 <SettingsItem
                     settings={THEME}
                     currentSetting={theme}
@@ -158,7 +158,6 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginTop: 20,
         fontSize: 30,
-        color: 'purple',
     },
     itemRow: {
         height: 80,

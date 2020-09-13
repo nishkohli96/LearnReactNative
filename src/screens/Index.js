@@ -99,7 +99,7 @@ const Index = () => {
                     <Stack.Screen
                         name="AppSettings"
                         component={AppSettings}
-                        // options={{ headerShown: false }}
+                        options={{ headerShown: false }}
                     />
                     <Stack.Screen name="WebViewComp" component={WebViewComp} />
                     <Stack.Screen
