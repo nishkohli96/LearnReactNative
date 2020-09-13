@@ -5,30 +5,18 @@ import Onboarding from 'react-native-onboarding-swiper';
 import { AsyncStorage } from 'react-native';
 
 const IntroScreen = () => {
-
     const navigation = useNavigation(); /* Navigation Hook */
-    
+
     const gotoMainPage = async () => {
-        await AsyncStorage.setItem('firstTime','false');
+        await AsyncStorage.setItem('firstTime', 'false');
         navigation.navigate('NavList');
     };
 
-    const checkFirstUse = async() => {
-        let appFirstTime = await AsyncStorage.getItem('firstTime');
-        console.log('first tim ? ', appFirstTime);
-        if(appFirstTime === null){
-            console.log('set item')
-            await AsyncStorage.setItem('firstTime','true');
-        }
-        if(appFirstTime === 'false') {
-            navigation.navigate('NavList');
-        }
-    }
     const DoneBtn = () => {
         return <Text onPress={() => gotoMainPage()}>Done</Text>;
     };
 
-    checkFirstUse();
+    // checkFirstUse();
 
     /* Refer https://www.npmjs.com/package/react-native-onboarding-swiper  */
     return (

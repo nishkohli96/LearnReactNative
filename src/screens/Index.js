@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { AsyncStorage } from 'react-native';
 
 import IntroScreen from './IntroScreens/IntroScreen';
 import NavList from './NavList';
@@ -20,18 +21,34 @@ import NavDrawer from './NavDrawer';
 import AppSettings from './AppSettings';
 
 import ThemeContext from '../context/ThemeContext';
-import { LightTheme } from '../themes/LightTheme';
 
 /* To add a new route, make sure to add item in Listdata.js */
 const Stack = createStackNavigator();
 
 const Index = () => {
+    const [firstscreen, setFirstScreen] = React.useState('IntroScreen');
+
+    /* If app using first time, go to IntroScreen, else go to NavList */
+    const checkFirstUse = async () => {
+        let appFirstTime = await AsyncStorage.getItem('firstTime');
+        if (appFirstTime === null) {
+            console.log('set item');
+            await AsyncStorage.setItem('firstTime', 'true');
+            setFirstScreen('IntroScreen');
+        }
+        if (appFirstTime === 'false') {
+            setFirstScreen('NavList');
+        }
+    };
+
+    checkFirstUse();
+
     return (
-        <ThemeContext>
-            <NavigationContainer theme={LightTheme}>
-                {/* Setting Default Props of header across all screens  */}
+        <NavigationContainer>
+            {/* Setting Default Props of header across all screens  */}
+            <ThemeContext>
                 <Stack.Navigator
-                    initialRouteName="IntroScreen"
+                    initialRouteName={firstscreen}
                     screenOptions={{
                         headerStyle: {
                             backgroundColor: '#f4511e',
@@ -82,7 +99,7 @@ const Index = () => {
                     <Stack.Screen
                         name="AppSettings"
                         component={AppSettings}
-                        options={{ title: 'Settings' }}
+                        // options={{ headerShown: false }}
                     />
                     <Stack.Screen name="WebViewComp" component={WebViewComp} />
                     <Stack.Screen
@@ -96,8 +113,8 @@ const Index = () => {
                     />
                     <Stack.Screen name="NavDrawer" component={NavDrawer} />
                 </Stack.Navigator>
-            </NavigationContainer>
-        </ThemeContext>
+            </ThemeContext>
+        </NavigationContainer>
     );
 };
 
