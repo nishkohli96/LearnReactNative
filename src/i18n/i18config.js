@@ -3,34 +3,33 @@ import { AsyncStorage } from 'react-native';
 import common_en from './translations/en/common.json';
 import common_fr from './translations/fr/common.json';
 
-let currentLang;
+let currentLang = 'en';
 
-export const setLang = async (lang) => {
-    lang = lang === undefined ? 'en' : lang;
+/* Retrieving the AsyncStorage value for 'Language' Property, and then configure
+    i18n to use that language only, unless changed in settings */
+
+export const getCurrentLang = async () => {
+    currentLang = await AsyncStorage.getItem('Language');
+    return currentLang;
+};
+
+export const changeLang = async (lang) => {
     await AsyncStorage.setItem('Language', lang);
 };
 
 const setInitialLang = async () => {
-    let initialLang = getCurrentLang();
-    if (initialLang) {
-        setLang(initialLang);
-    } else {
-        setLang('en');
+    let initialLang = await getCurrentLang();
+    if (!initialLang) {
+        changeLang(currentLang);
     }
+    configurei18();
 };
 
-export const getCurrentLang = async () => {
-    currentLang = await AsyncStorage.getItem('Language');
-
-    console.log('lang ', currentLang);
-    return currentLang;
-};
-
-setLang();
-
+const configurei18 = () => {
 i18next.init({
     interpolation: { escapeValue: false }, // React already does escaping
     lng: currentLang, // language to use
+    fallbackLng: 'en', // in case no language found
     resources: {
         en: {
             common: common_en, // 'common' is our custom namespace
@@ -40,9 +39,12 @@ i18next.init({
         },
     },
 });
+}
 
 const get18config = () => {
     return i18next;
 };
+
+setInitialLang();
 
 export default get18config;

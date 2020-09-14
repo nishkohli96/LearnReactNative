@@ -13,7 +13,7 @@ import { THEME, LANGUAGE } from '../constants/Settings';
 import { ThemeToggleContext } from '../context/ThemeContext';
 import { ThemedView, ThemedText } from '../styled-components/Themed-Comps';
 import { useTranslation } from 'react-i18next';
-import { setLang, getCurrentLang } from '../i18n/i18config';
+import { changeLang } from '../i18n/i18config';
 
 const AppSettings = () => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -129,7 +129,7 @@ const AppSettings = () => {
             setLang1(value);
             i18n.changeLanguage(value);
             LANGUAGE.value = value;
-            setLang(value);
+            changeLang(value);
             LANGUAGE.value = getSettingsText(LANGUAGE, value);
         }
     };
