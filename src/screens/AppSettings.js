@@ -12,16 +12,18 @@ import { RadioButton, Text } from 'react-native-paper';
 import { THEME, LANGUAGE } from '../constants/Settings';
 import { ThemeToggleContext } from '../context/ThemeContext';
 import { ThemedView, ThemedText } from '../styled-components/Themed-Comps';
+import { useTranslation } from 'react-i18next';
+import { setLang, getCurrentLang } from '../i18n/i18config';
 
 const AppSettings = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [modalTitle, setModalTitle] = useState('');
     const [modalData, setModalData] = useState([]);
     const [radiogrpValue, setRadiogpValue] = useState('');
-    const [lang, setLang] = useState(LANGUAGE.value);
+    const [lang, setLang1] = useState(LANGUAGE.value);
 
     const { theme, changeTheme } = React.useContext(ThemeToggleContext);
-
+    const { i18n } = useTranslation('common');
     const SettingsItem = ({
         settings,
         currentSetting,
@@ -124,8 +126,10 @@ const AppSettings = () => {
             changeTheme(value);
             THEME.value = getSettingsText(THEME, value);
         } else {
-            setLang(value);
+            setLang1(value);
+            i18n.changeLanguage(value);
             LANGUAGE.value = value;
+            setLang(value);
             LANGUAGE.value = getSettingsText(LANGUAGE, value);
         }
     };

@@ -18,10 +18,12 @@ import { useFocusEffect } from '@react-navigation/native';
 import { ThemedView } from '../styled-components/Themed-Comps';
 import Header from '../components/Header';
 import { StyledView, StyledText } from '../styled-components/Styled-Comps';
+import { useTranslation } from 'react-i18next';
 
 const NavList = () => {
     const navigation = useNavigation(); /* Navigation Hook */
 
+    /*  Back Button Implementation For Android, to Close the app in this case */
     const backAction = () => {
         if (Platform.OS === 'android') {
             Alert.alert('Hold on!', 'Close the App?', [
@@ -39,7 +41,9 @@ const NavList = () => {
         return true;
     };
 
-    /* Back Button Implementation For Android, to Close the app in this case */
+    /* useFocusEffect is similar to useEffect Hook, however it mainly deals with the
+       current route on the Navigator stack */
+
     useFocusEffect(() => {
         BackHandler.addEventListener('hardwareBackPress', backAction);
 
@@ -108,6 +112,8 @@ const NavList = () => {
         );
     }
 
+    const { t } = useTranslation('common');
+
     function navigateToScreen(item) {
         navigation.navigate(item.screenName);
     }
@@ -118,6 +124,11 @@ const NavList = () => {
             <StatusBar backgroundColor="#007aba" />
             <Header title="NavList" navigate={navigation} />
             <StyledView>
+                <React.Suspense fallback="Translations loading">
+                    <StyledText style={styles.welcomeText}>
+                        {t('welcome', { appName: 'LearnReactNative' })}
+                    </StyledText>
+                </React.Suspense>
                 <StyledText style={styles.headerText}>
                     Please Click on the List Item for Demo, or expand the
                     item,for brief description. Code in same file as the item
@@ -138,9 +149,14 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     headerText: {
-        // color: 'blue',
         fontSize: 15,
         padding: 10,
+    },
+    welcomeText: {
+        marginTop: 20,
+        marginLeft: 30,
+        fontSize: 20,
+        fontWeight: 'bold',
     },
     listItem: {
         color: 'orange',

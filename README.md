@@ -26,3 +26,4 @@ yarn start
 - App Onboarding Screen
 - Implement majority of the [React-Native](https://reactnative.dev/) components
 - Theming & Styles using [Styled Components](https://styled-components.com/)
+- Internationalization using [react-i18-next](https://react.i18next.com/)
