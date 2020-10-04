@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { AsyncStorage } from '@react-native-community/async-storage';
+import { AsyncStorage } from 'react-native';
 
 import IntroScreen from './IntroScreens/IntroScreen';
 import NavList from './NavList';

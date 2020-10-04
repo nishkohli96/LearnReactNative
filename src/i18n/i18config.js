@@ -1,5 +1,5 @@
 import i18next from 'i18next';
-import { AsyncStorage } from '@react-native-community/async-storage';
+import { AsyncStorage } from 'react-native';
 import common_en from './translations/en/common.json';
 import common_fr from './translations/fr/common.json';
 
