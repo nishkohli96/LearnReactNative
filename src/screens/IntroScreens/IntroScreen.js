@@ -1,11 +1,8 @@
 import React from 'react';
-import { Text, Image } from 'react-native';
+import { Text, Image, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Onboarding from 'react-native-onboarding-swiper';
-import { AsyncStorage } from 'react-native';
-/* AsyncStoarge from 'react-native' might be deprecated, import from rnc/as was throwing
- some error, so wud look into that later */ 
-//import { AsyncStorage } from '@react-native-community/async-storage';
+import { AsyncStorage } from '@react-native-community/async-storage';
 
 const IntroScreen = () => {
     const navigation = useNavigation(); /* Navigation Hook */
@@ -15,8 +12,16 @@ const IntroScreen = () => {
         navigation.navigate('NavList');
     };
 
+    const SkipBtn = () => {
+        return <Text style={styles.skipBtn}>Skip</Text>;
+    };
+
+    const NextBtn = () => {
+        return <Text style={styles.doneBtn}>Next</Text>;
+    };
+
     const DoneBtn = () => {
-        return <Text onPress={() => gotoMainPage()}>Done</Text>;
+        return <Text style={styles.doneBtn} onPress={() => gotoMainPage()}>Done</Text>;
     };
 
     // checkFirstUse();
@@ -26,6 +31,8 @@ const IntroScreen = () => {
         <Onboarding
             onSkip={() => gotoMainPage()}
             onDone={() => gotoMainPage()}
+            nextLabel={<NextBtn />}
+            skipLabel={<SkipBtn />}
             DoneButtonComponent={DoneBtn}
             pages={[
                 {
@@ -54,5 +61,16 @@ const IntroScreen = () => {
         />
     );
 };
+
+const styles = StyleSheet.create({
+    doneBtn: {
+        marginRight: 20,
+        fontSize: 20,
+    },
+    skipBtn: {
+        marginLeft: 20,
+        fontSize: 20,
+    },
+});
 
 export default IntroScreen;
