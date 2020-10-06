@@ -2,14 +2,18 @@ import React from 'react';
 import { Text, Image, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Onboarding from 'react-native-onboarding-swiper';
-import { AsyncStorage } from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const IntroScreen = () => {
     const navigation = useNavigation(); /* Navigation Hook */
 
     const gotoMainPage = async () => {
-        await AsyncStorage.setItem('firstTime', 'false');
-        navigation.navigate('NavList');
+        try {
+            await AsyncStorage.setItem('firstTime', 'false');
+            navigation.navigate('NavList');
+        } catch (e) {
+            console.log('save err ', e);
+        }
     };
 
     const SkipBtn = () => {
@@ -21,10 +25,12 @@ const IntroScreen = () => {
     };
 
     const DoneBtn = () => {
-        return <Text style={styles.doneBtn} onPress={() => gotoMainPage()}>Done</Text>;
+        return (
+            <Text style={styles.doneBtn} onPress={() => gotoMainPage()}>
+                Done
+            </Text>
+        );
     };
-
-    // checkFirstUse();
 
     /* Refer https://www.npmjs.com/package/react-native-onboarding-swiper  */
     return (

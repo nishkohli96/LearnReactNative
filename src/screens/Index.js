@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { AsyncStorage } from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import IntroScreen from './IntroScreens/IntroScreen';
 import NavList from './NavList';
@@ -29,27 +29,18 @@ const Index = () => {
     const [firstscreen, setFirstScreen] = React.useState('IntroScreen');
 
     /* If app using first time, go to IntroScreen, else go to NavList */
-    const checkFirstUse = async() => {
+    const checkFirstUse = async () => {
         let appFirstTime;
         try {
             appFirstTime = await AsyncStorage.getItem('firstTime');
-        }
-        catch(e) {
-            /* Value has to be string format and not boolean */
-            appFirstTime = null;
-        }
-        if(appFirstTime === null) {
-            try{
-                await AsyncStorage.setItem('firstTime', 'true');
-                setFirstScreen('IntroScreen');}
-            catch(err){
-                console.log('sec err : ',err)
-            }
+        } catch (e) {
+            await AsyncStorage.setItem('firstTime', 'true');
+            setFirstScreen('IntroScreen');
         }
         if (appFirstTime === 'false') {
             setFirstScreen('NavList');
         }
-    }
+    };
 
     checkFirstUse();
 
