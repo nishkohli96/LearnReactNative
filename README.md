@@ -6,8 +6,6 @@ This Project has been made using [expo.io](https://expo.io/).
 I have mainly tested this App on an Android device, and would be later testing the same on
 an iOS simulator.
 
-#### **__The Project is currently a Work-in-Progress__**
-
 ## Installation
 
 Please Clone or Fork this Repository and run the following command to install 'node_modules'
