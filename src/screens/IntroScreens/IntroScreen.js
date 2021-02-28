@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, Image, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Onboarding from 'react-native-onboarding-swiper';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const IntroScreen = () => {
     const navigation = useNavigation(); /* Navigation Hook */

@@ -1,5 +1,6 @@
+/* eslint-disable linebreak-style */
 import i18next from 'i18next';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import common_en from './translations/en/common.json';
 import common_fr from './translations/fr/common.json';
 
@@ -11,6 +12,9 @@ let currentLang = 'en';
 export const getCurrentLang = async () => {
     try {
         currentLang = await AsyncStorage.getItem('Language');
+        if (currentLang === null) {
+            currentLang = 'en';
+        }
     } catch {
         /* handle promise rejection, in case the AsyncStorage Item not found */
         currentLang = 'en';
@@ -31,7 +35,8 @@ const setInitialLang = async () => {
 };
 
 const configurei18 = () => {
-    i18next.init({
+    console.log('lang ', currentLang);
+    return i18next.init({
         interpolation: { escapeValue: false }, // React already does escaping
         lng: currentLang, // language to use
         fallbackLng: 'en', // in case no language found

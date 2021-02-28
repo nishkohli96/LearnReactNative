@@ -10,7 +10,7 @@
         "eject": "expo eject"
     },
     "dependencies": {
-        "@react-native-community/async-storage": "^1.12.0",
+        "@react-native-async-storage/async-storage": "^1.14.1",
         "@react-native-community/masked-view": "0.1.10",
         "@react-navigation/bottom-tabs": "^5.8.0",
         "@react-navigation/drawer": "^5.9.0",
@@ -36,7 +36,7 @@
         "react": "~16.11.0",
         "react-dom": "~16.11.0",
         "react-i18next": "^11.7.2",
-        "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
+        "react-native": "^0.63.4",
         "react-native-collapsible": "^1.5.3",
         "react-native-elements": "^2.0.4",
         "react-native-expo-viewport-units": "^0.0.8",
