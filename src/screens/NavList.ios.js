@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { BackHandler, Alert, Platform } from 'react-native';
+import React, { useState } from 'react';
 import {
     FlatList,
     View,
@@ -13,7 +12,6 @@ import { Listdata } from '../constants/Listdata';
 import Collapsible from 'react-native-collapsible';
 import PropTypes from 'prop-types';
 import { useNavigation } from '@react-navigation/native';
-import { useFocusEffect } from '@react-navigation/native';
 
 import { ThemedView } from '../styled-components/Themed-Comps';
 import Header from '../components/Header';
@@ -22,34 +20,6 @@ import { useTranslation } from 'react-i18next';
 
 const NavList = () => {
     const navigation = useNavigation(); /* Navigation Hook */
-
-    /*  Back Button Implementation For Android, to Close the app in this case */
-    const backAction = () => {
-        if (Platform.OS === 'android') {
-            Alert.alert('Hold on!', 'Close the App?', [
-                {
-                    text: 'Cancel',
-                    onPress: () => null,
-                    style: 'cancel',
-                },
-                {
-                    text: 'YES',
-                    onPress: () => BackHandler.exitApp(),
-                },
-            ]);
-        }
-        return true;
-    };
-
-    /* useFocusEffect is similar to useEffect Hook, however it mainly deals with the
-       current route on the Navigator stack */
-
-    useFocusEffect(() => {
-        BackHandler.addEventListener('hardwareBackPress', backAction);
-
-        return () =>
-            BackHandler.removeEventListener('hardwareBackPress', backAction);
-    }, []);
 
     const expand_icon = require('../assets/icons/expand-icon.png');
     const collapse_icon = require('../assets/icons/collapse-icon.png');
@@ -120,9 +90,8 @@ const NavList = () => {
 
     return (
         <ThemedView style={styles.listContainer}>
-            {/* <ThemedStatusBar /> */}
-            <StatusBar backgroundColor="#007aba" />
-            <Header title="NavList" navigate={navigation} />
+            <StatusBar backgroundColor="#007bff" />
+            <Header title="NavList iOS" navigate={navigation} />
             <StyledView>
                 <React.Suspense fallback="Translations loading">
                     <StyledText style={styles.welcomeText}>
@@ -131,8 +100,7 @@ const NavList = () => {
                 </React.Suspense>
                 <StyledText style={styles.headerText}>
                     Please Click on the List Item for Demo, or expand the
-                    item,for brief description. Code in same file as the item
-                    name
+                    item,for brief description.
                 </StyledText>
             </StyledView>
             <FlatList
@@ -147,6 +115,7 @@ const NavList = () => {
 const styles = StyleSheet.create({
     listContainer: {
         flex: 1,
+        paddingTop: 50,
     },
     headerText: {
         fontSize: 15,

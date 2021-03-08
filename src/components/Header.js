@@ -30,7 +30,6 @@ const Header = ({ title, navigate }) => {
 
 const styles = StyleSheet.create({
     headerBar: {
-        // backgroundColor: '#007aba',
         height: 50,
         flexDirection: 'row',
         padding: 10,

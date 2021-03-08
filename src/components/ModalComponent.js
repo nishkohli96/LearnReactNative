@@ -18,7 +18,6 @@ const ModalComponent = () => {
             <ImageBackground source={image} style={styles.image}>
                 <View style={styles.centeredView}>
                     <Text style={styles.text}>
-                        {' '}
                         Added Icon from react-native-vector-icons
                     </Text>
                     <Icon name="rocket" size={50} color="#900" />
@@ -34,7 +33,7 @@ const ModalComponent = () => {
                         <View style={styles.centeredView}>
                             <View style={styles.modalView}>
                                 <Text style={styles.modalText}>
-                                    Hello World!
+                                    Hello World on ios/android!
                                 </Text>
 
                                 <TouchableHighlight
